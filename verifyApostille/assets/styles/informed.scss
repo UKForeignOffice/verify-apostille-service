@@ -23,12 +23,13 @@ ul {
 .nopaddingright  {padding-right: 0!important}
 .floatright {float: right}
 .floatleft {float: left}
+.floatnone {float: none}
 .nonboldlabel {font-weight: 100;font-size: 19px;}
 .bold-text {font-weight: bold}
 .text-block {display: block}
 .marginlr15 {margin-left: 15px!important;margin-right: 15px;}
 .textindent { display: block; text-indent: -100000em; height: 0; width: 0; max-width: 0; max-height: 0; position: absolute;}
-.column-two-thirds {padding: 0!important}
+.column-two-thirds {padding: 0!important; float:none;}
 .full-width {  width:100%}
 // Hide, only when JavaScript is enabled
 .js-enabled .js-hidden {  display: none;}
@@ -206,6 +207,8 @@ input[type="text"].apostNoText {
   float: none;
   display: block;
 }
+
+
 
 
 

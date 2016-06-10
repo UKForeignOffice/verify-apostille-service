@@ -7,7 +7,7 @@
 
 module.exports = {
     openApostilePage: function(req,res){
-        return res.view('index.ejs');
+        return res.view('verifyApostille.ejs');
     }
 };
 
