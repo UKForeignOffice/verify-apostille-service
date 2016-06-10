@@ -1,24 +1,37 @@
 /**
- * Development environment settings
+ * Environment settings
  *
- * This file can include shared settings for a development team,
- * such as API keys or remote database passwords.  If you're using
- * a version control solution for your Sails app, this file will
- * be committed to your repository unless you add it to your .gitignore
- * file.  If your repository will be publicly viewable, don't add
- * any private information to this file!
+ * This file can include shared settings that override settings in indvidual files in the config folder,
+ * Here we are using environment variables and the dotenv npm package to load sensitive information
+ * that should not be included in the public repo
  *
  */
 
+var Sequelize = require('sequelize');
+var dotenv = require('dotenv');
+var env = dotenv.config();
+
+var applicationDatabase = JSON.parse(env.APPLICATIONDATABASE);
+
 module.exports = {
 
-  /***************************************************************************
-   * Set the default database connection for models in the development       *
-   * environment (see config/connections.js and config/models.js )           *
-   ***************************************************************************/
-
-  // models: {
-  //   connection: 'someMongodbServer'
-  // }
+    connections:  {ApplicationDatabase: {
+        adapter: 'sails-postgresql',
+        host: applicationDatabase.host,
+        user: applicationDatabase.user,
+        password: applicationDatabase.password,
+        database: applicationDatabase.database,
+        dialect: 'postgres',
+        options: {
+            dialect: 'postgres',
+            host: applicationDatabase.host,
+            dialectOptions: {
+                socketPath: ''
+            },
+            port: applicationDatabase.port,
+            logging: true
+        }
+    }
+    }
 
 };

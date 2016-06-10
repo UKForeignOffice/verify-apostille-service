@@ -1,0 +1,184 @@
+<div id="wrapper">
+    <section id="content" role="main" class="group">
+        <div class="article-container group">
+
+
+            <article role="article" class="group">
+                <header class="page-header group">
+                    <hgroup>
+                        <h1 class="heading-xlarge">Verify an Apostille</h1>
+                    </hgroup>
+                </header>
+
+                <div class="inner">
+
+                    <form action="/VerifyApostille/Details" method="post">
+
+
+                        <input name="__RequestVerificationToken" type="hidden" value="emzhuLLvUTJx9TrystrXJLJuBCVl-aeUirdHHoKiLoDj7-HLcdJeg0uWdBm_qjFrXNpvbPg5--4v9IGbhHeGrrjjYPh9YcBNgq0IaYfnR-9bHMioqbQmfAAxg6tErReZjJAtudT-PMgDxnMoLk-cTD6EHlL9KOZKwTbRGUrvzus1" />
+                        <div class="step current" >
+                            <fieldset>
+                                <legend class="visuallyhidden">Verify an Apostille</legend>
+
+
+
+                                <div class="validation-summary-js" style="display:none">
+                                    <h1>Please check the form</h1>
+                                    <ul id="errorList">
+                                    </ul>
+                                </div>
+
+                                <div class="group" id="enterDate">
+                                    <label class="lWidth searchDate">Date of the Apostille - dd/mm/yyyy</label>
+                                    <input autocomplete="off" class="searchDate" data-val="true" data-val-length="The field SearchDate must be a string with a maximum length of 10." data-val-length-max="10" id="SearchDate" maxlength="10" name="SearchDate" type="text" value="" />
+                                </div>
+
+                                <div class="inline group">
+                                    <label for="apost1" id="apostLabel">Enter Apostille number e.g. A090123 </label>
+                                    <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo1 must be a string with a maximum length of 1." data-val-length-max="1" data-val-regex="The first character was expected to be alphabetic (A to Z)" data-val-regex-pattern="^[a-zA-Z]+$" id="ApostNo1" maxlength="1" name="ApostNo1" type="text" value="" />
+
+                                    <label for="apost2" class="visuallyhidden">Apostille number 2</label>
+                                    <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo2 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo2" maxlength="1" name="ApostNo2" type="text" value="" />
+
+                                    <label for="apost3" class="visuallyhidden">Apostille number 3</label>
+                                    <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo3 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo3" maxlength="1" name="ApostNo3" type="text" value="" />
+
+                                    <label for="apost4" class="visuallyhidden">Apostille number 4</label>
+                                    <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo4 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo4" maxlength="1" name="ApostNo4" type="text" value="" />
+
+                                    <label for="apost5" class="visuallyhidden">Apostille number 5</label>
+                                    <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo5 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo5" maxlength="1" name="ApostNo5" type="text" value="" />
+
+                                    <label for="apost6" class="visuallyhidden">Apostille number 6</label>
+                                    <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo6 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo6" maxlength="1" name="ApostNo6" type="text" value="" />
+
+                                    <label for="apost7" class="visuallyhidden">Apostille number 7</label>
+                                    <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo7 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo7" maxlength="1" name="ApostNo7" type="text" value="" />
+                                </div>
+                                <br />
+
+                                <p class="action group">
+                                    <input class="button" type="submit" value="Verify" id="submitValidation" />   <br /><br />
+                                    <input class="button-secondary" type="button" value="Clear entry" id="reset" />
+                                </p>
+
+
+
+                            </fieldset>
+                        </div>
+
+                        <script type="text/javascript" src="/Scripts/eRegForm.js"></script>
+                        <script type="text/javascript">
+
+                            $(document).ready(function () {
+
+
+                                // Set the view to reload after 5 mins
+                                var t = setInterval("resetForm();", 1000 * 60 * 5);
+
+                                // Date picker
+                                //$("#SearchDate").datepicker();
+                                $("#SearchDate").datepicker({
+                                    minDate: new Date(2007, 1 - 1, 1),
+                                    maxDate: '-1D',
+                                    showOn: "button",
+                                    buttonImage: '/images/icon-calendar.png',
+                                    buttonImageOnly: true,
+                                    dateFormat: 'dd/mm/yy',
+                                    yearRange: "2007:2016",
+                                    changeYear: true
+                                });
+
+                                $("#SearchDate").change(function (e) {
+                                    clearInterval(t);
+                                    t = setInterval("resetForm();", 1000 * 60 * 5);
+                                });
+
+                                $("#ApostNo1").keyup(function (e) {
+                                    var value = $(this).val();
+                                    var regx = /^[A-Za-z]+$/;
+
+                                    $("#errorList").empty(); // Clear errors
+                                    $(".validation-summary-errors").hide();
+                                    $(".validation-summary-js").hide();
+
+                                    if (e.which == 8 || e.which == 46) {
+                                        e.preventDefault();
+                                    }
+                                    else if (value == '') {
+                                    }
+                                    else if (value == 'Z' || value == 'z') {
+                                        //Add error to list
+                                        var msg = "<li>Unfortunately we cannot validate this Apostille online as the Apostille number begins with Z or z." +
+                                                "<br /> Please email <a href=\"mailto:verifyapostille@fco.gov.uk\">verifyapostille@fco.gov.uk</a> with the Apostille number and date.</li>";
+
+                                        $("#errorList").append(msg);
+                                        $(".validation-summary-js").show();
+                                        $(this).val("");
+                                        $(this).focus();
+                                    }
+                                    else if (!regx.test(value)) {
+                                        $(this).val("");
+                                        $(this).focus();
+                                    }
+
+                                    clearInterval(t);
+                                    t = setInterval("resetForm();", 1000 * 60 * 5);
+                                });
+
+                                $("#ApostNo7").keyup(function (e) {
+                                    if (e.which == 8 || e.which == 9 || e.which == 16 || e.which == 46) {
+                                        e.preventDefault();
+                                    }
+                                    else {
+                                        //$("#submitValidation").show();
+                                        $("#submitValidation").focus();
+                                    }
+                                    clearInterval(t);
+                                    t = setInterval("resetForm();", 1000 * 60 * 5);
+                                });
+
+                                //Set focus on the next input text type
+                                $("input.apostNoText").keyup(function (e) {
+
+                                    //do not move to next textbox if deleting value
+                                    if (e.which == 8 || e.which == 9 || e.which == 16 || e.which == 46) {
+                                        e.preventDefault();
+                                    }
+                                    else if (!$.isNumeric($(this).val()) && $(this).attr("id") != "ApostNo1") {
+                                        $(this).val("");
+                                        $(this).focus();
+                                    }
+                                    else if ($.isNumeric($(this).val()) && $(this).attr("id") == "ApostNo1") {
+                                        $(this).val("");
+                                        $(this).focus();
+                                    }
+                                    else {
+                                        if ($(this).val() != "") {
+                                            var inputs = $(this).closest('form').find(':input[type="text"]');
+                                            var nextInput = inputs.eq(inputs.index(this) + 1);
+                                            nextInput.focus();
+                                            nextInput.select();
+                                            //$(this).next(':input').focus();
+                                        }
+                                    }
+
+                                    clearInterval(t);
+                                    t = setInterval("resetForm();", 1000 * 60 * 5);
+                                });
+
+                                $("#reset").click(function () {
+                                    resetForm();
+                                    clearInterval(t);
+                                    t = setInterval("resetForm();", 1000 * 60 * 5);
+                                });
+                            });
+
+                        </script>
+                    </form>	</div>
+
+            </article>
+
+        </div>
+    </section>
+</div>

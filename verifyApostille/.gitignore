@@ -116,3 +116,12 @@ npm-debug.log
 nbproject
 .idea
 .node_history
+
+
+/.idea
+.idea/encodings.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/scopes/scope_settings.xml
+.idea/*/*.xml
+.env

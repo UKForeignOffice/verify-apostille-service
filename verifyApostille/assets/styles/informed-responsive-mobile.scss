@@ -1,0 +1,18 @@
+
+@include media(mobile){
+  fieldset.inline.error {
+    width: 98%
+  }
+  .error input[type='text'],
+  .error input[type='tel'],
+  .error input[type='email'],
+  .error select {
+    width: 98%
+  }
+
+  .error .block-label {width:auto}
+
+
+}
+
+
