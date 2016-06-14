@@ -33,7 +33,11 @@ module.exports.routes = {
      ***************************************************************************/
 
     '/': { view: 'homepage' },
-    '/verify' : 'Verify-apostilleController.openApostilePage'
+    '/verify' : 'Verify-apostilleController.openApostilePage',
+    '/details' : 'ApostilleDetailsController.details'
+    //'/apostille-details' : 'ApostilleDetailsController.details',
+    //'/details' : 'Verify-apostilleController.details'
+        
 
     /***************************************************************************
      *                                                                          *
