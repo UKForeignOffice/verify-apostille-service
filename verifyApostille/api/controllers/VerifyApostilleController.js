@@ -5,7 +5,7 @@
 
 var apostilleDetailsController = {
     openApostillePage: function(req,res){
-        return res.view('verifyApostille.ejs');
+        return res.view('verifyApostille.ejs',{error_report:false});
     },
 
     findApostille: function(req, res) {
@@ -13,11 +13,11 @@ var apostilleDetailsController = {
         var errors = [];
 
         if(!req.body.ApostDay || !req.body.ApostMonth || !req.body.ApostYear ){
-            errors.push({link:"ApostDay", message:"Unfortunately we can't validate the Apostille date entered, please check that the date format is correct."})
+            errors.push({link:"date-container", message:"Unfortunately we can't validate the Apostille date entered, please check that the date format is correct"})
         }    
 
         if(!req.body.ApostNumber || (req.body.ApostNumber && req.body.ApostNumber.length<8)){
-            errors.push({link:"ApostNumber", message:"Please enter the complete Apostille number."})
+            errors.push({link:"ApostNumber", message:"Please enter the complete Apostille number"})
         }
         if(errors.length > 0){
             return res.view('verifyApostille.ejs',{error_report : errors});

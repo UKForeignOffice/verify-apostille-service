@@ -215,6 +215,9 @@ input[type="text"].apostNoText {
 #find-apostille label {
   display: block;
 }
+#find-apostille .error-summary {
+  margin-top: 0px;
+}
 
 #date-container {
   font-size: 19px;

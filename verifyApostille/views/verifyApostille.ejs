@@ -16,7 +16,7 @@ function checkError(id){
             <fieldset>
                 <legend class="visuallyhidden">Verify an Apostille</legend>
 
-                <%if (typeof(error_report)!='undefined') {%>
+                <%if (typeof(error_report)!='undefined' && error_report) {%>
                 <div class="error-summary" role="group"    tabindex="-1">
                     <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
                         Please check the form
@@ -29,8 +29,9 @@ function checkError(id){
                 </div>
                 <%}%>
 
-                <div class="inline group <%if(error_report && checkError("date")){%>error<%}%>" id="date-container" >
+                <div class="inline group <%if(error_report && checkError("date-container")){%>error<%}%>" id="date-container" >
                     <label class="lWidth searchDate">Date of the Apostille - dd/mm/yyyy</label>
+                    <%if(error_report && checkError("ApostNumber")){%><span class="error-message">Enter valid date</span><%}%>
                     <label for="ApostDay" class="visually-hidden">Day in dd format</label>
                     <input class="form-control form-control-1-8" autocomplete="off" id="ApostDay"  size="2" maxlength="2" name="ApostDay" type="text" value="" /> /
 
