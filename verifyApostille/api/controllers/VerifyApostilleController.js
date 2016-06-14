@@ -3,13 +3,12 @@
  * @module Controller AposilleDetailsController
  */
 
-
-var thisPagesTitle = "Verify Result";
-
 var apostilleDetailsController = {
+    openApostillePage: function(req,res){
+        return res.view('verifyApostille.ejs');
+    },
 
-
-    details: function(req, res) {
+    findApostille: function(req, res) {
             console.log("APOSTILLE NUMBER input RES: ", req.body);
         var errors = [];
 
@@ -37,7 +36,7 @@ var apostilleDetailsController = {
                 SignedBy: result.SignedBy,
                 ActingCapacityOf: result.ActingCapacityOf,
                 BearsStampSeal: result.BearsStampSeal,
-                IssuedBy: result.IssuedBy,
+                IssuedBy: result.IssuedBy
             });
         })
         .catch( function(error) {

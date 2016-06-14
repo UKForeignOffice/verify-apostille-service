@@ -208,7 +208,17 @@ input[type="text"].apostNoText {
   display: block;
 }
 
+.error-summary .error-summary-list li {
+  list-style: none;
+}
 
+#find-apostille label {
+  display: block;
+}
+
+#date-container {
+  font-size: 19px;
+}
 
 
 
