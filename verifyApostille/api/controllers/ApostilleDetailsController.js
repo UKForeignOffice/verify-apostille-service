@@ -4,13 +4,21 @@
  */
 
 
-//var thisPagesTitle = "Verify Result";
+var thisPagesTitle = "Verify Result";
 
 var apostilleDetailsController = {
 
 
     details: function(req, res) {
             console.log("APOSTILLE NUMBER input RES: ", req.body);
+        var errors = [];
+        if(!req.body.ApostNumber || (req.body.ApostNumber && req.body.ApostNumber.length<8)){
+            errors.push({link:"ApostNumber", message:"Please enter the complete Apostille number."})
+        }
+        if(errors.length > 0){
+            return res.view('verifyApostille.ejs',{error_report : errors});
+        }
+
         VerifyApostilleDetails.findOne({
             where: {
                 //ApostilleNumber: 'U0000000'
@@ -24,13 +32,16 @@ var apostilleDetailsController = {
                 SignedBy: result.SignedBy,
                 ActingCapacityOf: result.ActingCapacityOf,
                 BearsStampSeal: result.BearsStampSeal,
-                IssuedBy: result.IssuedBy
+                IssuedBy: result.IssuedBy,
             });
         })
         .catch( function(error) {
             sails.log(error);
             console.log(error);
             return res.view('verifyApostille.ejs', {
+                error_report:[ {
+                    link:"ApostNumber",  
+                    message:"Unable to verify Apostille number."}]
             });    
         });
     }

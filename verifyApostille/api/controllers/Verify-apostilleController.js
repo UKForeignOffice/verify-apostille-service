@@ -13,7 +13,7 @@ module.exports = {
     details: function (req, res) {
         //res.send("Verify Apostille Details!");
         //return res.view("details.ejs");
-        return res.view("apostille-details.ejs");
+        return res.view("apostille-details.ejs",{error_report:false});
     }
 };
 

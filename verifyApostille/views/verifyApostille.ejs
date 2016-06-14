@@ -10,7 +10,25 @@
                     </hgroup>
                 </header>
 
+
+
+
+
+
                 <div class="inner">
+
+<%if (typeof(error_report)!='undefined') {%> 
+<div class="error-summary" role="group"    tabindex="-1">
+    <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
+        Please check the form
+    </h2>
+    <ul class="error-summary-list nopadding">
+        <%for(var i=0;i<error_report.length;i++){%>
+		<li><a href="#<%= error_report[i].link%>"><%= error_report[i].message%></a></li>
+	<%}%>
+    </ul>
+</div>
+<%}%>
 
                     <form action="/details" method="post">
 
