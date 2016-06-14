@@ -30,6 +30,8 @@ var apostilleDetailsController = {
         .catch( function(error) {
             sails.log(error);
             console.log(error);
+            return res.view('verifyApostille.ejs', {
+            });    
         });
     }
 };
