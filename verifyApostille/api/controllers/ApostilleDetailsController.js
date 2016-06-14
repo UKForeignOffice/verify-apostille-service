@@ -12,6 +12,11 @@ var apostilleDetailsController = {
     details: function(req, res) {
             console.log("APOSTILLE NUMBER input RES: ", req.body);
         var errors = [];
+
+        if(!req.body.ApostDay || !req.body.ApostMonth || !req.body.ApostYear ){
+            errors.push({link:"ApostDay", message:"Unfortunately we can't validate the Apostille date entered, please check that the date format is correct."})
+        }    
+
         if(!req.body.ApostNumber || (req.body.ApostNumber && req.body.ApostNumber.length<8)){
             errors.push({link:"ApostNumber", message:"Please enter the complete Apostille number."})
         }
