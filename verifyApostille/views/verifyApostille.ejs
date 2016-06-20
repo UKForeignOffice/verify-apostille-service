@@ -33,55 +33,30 @@ function checkError(id){
                     <label class="lWidth searchDate">Date of the Apostille - dd/mm/yyyy</label>
                     <%if(error_report && checkError("date-container")){%><span class="error-message">Enter valid date</span><%}%>
                     <label for="ApostDay" class="visually-hidden">Day in dd format</label>
-                    <input class="form-control form-control-1-8" autocomplete="off" id="ApostDay"  size="2" maxlength="2" name="ApostDay" type="text" value="" /> /
+                    <input class="form-control form-control-1-8" autocomplete="off" id="ApostDay"  size="2" maxlength="2" name="ApostDay" type="text" value="<%= (apost_dd) ? apost_dd : '' %>" /> /
 
                     <label for="ApostMonth" class="visually-hidden">Month in mm format</label>
-                    <input class="form-control form-control-1-8" autocomplete="off" id="ApostMonth" size="2" maxlength="2" name="ApostMonth" type="text" value="" /> /
+                    <input class="form-control form-control-1-8" autocomplete="off" id="ApostMonth" size="2" maxlength="2" name="ApostMonth" type="text" value="<%= (apost_mm) ? apost_mm : '' %>" /> /
 
                     <label for="ApostYear" class="visually-hidden">Year in yyy format</label>
-                    <input class="form-control form-control-1-8" autocomplete="off" id="ApostYear" size="4" maxlength="4" name="ApostYear" type="text" value="" />
+                    <input class="form-control form-control-1-8" autocomplete="off" id="ApostYear" size="4" maxlength="4" name="ApostYear" type="text" value="<%= (apost_yyyy) ? apost_yyyy : '' %>" />
                 </div>
 
                 <br/>
                 <div class="form-group <%if(error_report && checkError("ApostNumber")){%>error<%}%>">
                     <label for="ApostNumber" id="apostLabel">Enter Apostille number e.g. A090123 </label>
                     <%if(error_report && checkError("ApostNumber")){%><span class="error-message"> Enter Apostille number</span><%}%>
-                    <input autocomplete="off" id="ApostNumber" class="form-control form-control-1-3" size="9" maxlength="8" name="ApostNumber" type="text" value="" />
+                    <input autocomplete="off" id="ApostNumber" class="form-control form-control-1-3" size="9" maxlength="8" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
                 </div>
 
                 <br />
 
                 <p class="action group">
                     <input class="button" type="submit" value="Verify" id="submitValidation" />   <br /><br />
-                    <input class="button-secondary" type="reset" value="Clear entry" id="reset" />
+                    <input class="button-secondary" type="button" value="Clear entry" id="reset" onClick="location.href='/verify';" />
                 </p>
 
             </fieldset>
         </form>
     </div>
 </div>
-
-<!--
-
-                             <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo1 must be a string with a maximum length of 1." data-val-length-max="1" data-val-regex="The first character was expected to be alphabetic (A to Z)" data-val-regex-pattern="^[a-zA-Z]+$" id="ApostNo1" maxlength="1" name="ApostNo1" type="text" value="" />
-
-                             <label for="apost2" class="visuallyhidden">Apostille number 2</label>
-                             <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo2 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo2" maxlength="1" name="ApostNo2" type="text" value="" />
-
-                             <label for="apost3" class="visuallyhidden">Apostille number 3</label>
-                             <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo3 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo3" maxlength="1" name="ApostNo3" type="text" value="" />
-
-                             <label for="apost4" class="visuallyhidden">Apostille number 4</label>
-                             <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo4 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo4" maxlength="1" name="ApostNo4" type="text" value="" />
-
-                             <label for="apost5" class="visuallyhidden">Apostille number 5</label>
-                             <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo5 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo5" maxlength="1" name="ApostNo5" type="text" value="" />
-
-                             <label for="apost6" class="visuallyhidden">Apostille number 6</label>
-                             <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo6 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo6" maxlength="1" name="ApostNo6" type="text" value="" />
-
-                             <label for="apost7" class="visuallyhidden">Apostille number 7</label>
-                             <input autocomplete="off" class="apostNoText" data-val="true" data-val-length="The field ApostNo7 must be a string with a maximum length of 1." data-val-length-max="1" id="ApostNo7" maxlength="1" name="ApostNo7" type="text" value="" />
-                         </div>
-
-                         -->
