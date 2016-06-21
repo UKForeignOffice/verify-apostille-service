@@ -16,7 +16,10 @@ var apostilleDetailsController = {
             errors.push({link:"date-container", message:"Unfortunately we can't validate the Apostille date entered, please check that the date format is correct"})
         }
 
-        if(!req.body.ApostNumber.match(/^[a-zA-Z]\d{6,7}/)){
+        // Apostille number regular expression is picked up from the environment config file.
+        // e.g. /^[a-zA-Z]\d{6,7}/ matches for one leading alphabetic followed by 6 or 7 numerics.
+
+        if(!req.body.ApostNumber.match( eval(sails.config.apostRegex) )){
             errors.push({link:"ApostNumber", message:"Please enter the complete Apostille number"})
         }
         if(errors.length > 0){
@@ -29,10 +32,15 @@ var apostilleDetailsController = {
             });
         }
 
+        var startDate = req.body.ApostDay + "-" + req.body.ApostMonth + "-" + req.body.ApostYear + " 00:00:00";
+        var endDate = req.body.ApostDay + "-" + req.body.ApostMonth + "-" + req.body.ApostYear + " 23:59:59";
+
         VerifyApostilleDetails.findOne({
             where: {
-                //ApostilleNumber: 'U0000000'
-                ApostilleNumber: req.body.ApostNumber
+                ApostilleNumber: req.body.ApostNumber,
+                DateIssued: {
+                    $between: [startDate , endDate]
+                }
             }
         }).then(function(result) {
             console.log("APOSTILLE NUMBER FOUND: ", result);
@@ -51,8 +59,12 @@ var apostilleDetailsController = {
             return res.view('verifyApostille.ejs', {
                 error_report:[ {
                     link:"ApostNumber",  
-                    message:"Unable to verify Apostille number."}]
-            });    
+                    message:"Unable to verify Apostille number."}],
+                apost_number : req.body.ApostNumber,
+                apost_dd : req.body.ApostDay,
+                apost_mm: req.body.ApostMonth,
+                apost_yyyy: req.body.ApostYear
+            });
         });
     }
 };

@@ -12,6 +12,7 @@ var dotenv = require('dotenv');
 var env = dotenv.config();
 
 var applicationDatabase = JSON.parse(env.APPLICATIONDATABASE);
+var apostilleRegex = JSON.parse(env.APOSTILLEREGEX);
 
 module.exports = {
 
@@ -32,6 +33,7 @@ module.exports = {
             logging: true
         }
     }
-    }
+    },
+    apostRegex: apostilleRegex.regex
 
 };
