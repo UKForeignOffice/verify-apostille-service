@@ -50,10 +50,10 @@
 
 <script> var _paq = _paq || [];</script>
 <body>
+<% if ( typeof apostPrint == 'undefined' ) {%>
 <%- partial ('partials/header.ejs') %>
+<%}%>
 <%- body %>
-
-
 
 <!--
     Client-side Templates
@@ -80,7 +80,9 @@
 
 <!--TEMPLATES END-->
 
+<% if ( typeof apostPrint == 'undefined' ){%>
 <%- partial ('partials/footer.ejs') %>
+<%}%>
 <!--
 
   Client-side Javascript

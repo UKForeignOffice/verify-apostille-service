@@ -14,7 +14,7 @@ var verifyApostilleDetails = {
             type: Sequelize.STRING
         },
         DateIssued: {
-            type: Sequelize.DATE
+            type: Sequelize.DATEONLY
         },    
         SignedBy: {
             type: Sequelize.STRING

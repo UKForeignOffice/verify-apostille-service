@@ -22,7 +22,7 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
   secret: 'caf61f42e05ba5beae56a8612194875a',
-
+  key: 'apostille.sid',
 
   /***************************************************************************
   *                                                                          *
@@ -31,9 +31,9 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // cookie: {
-  //   maxAge: 24 * 60 * 60 * 1000
-  // },
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -74,7 +74,13 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // adapter: 'mongo',
+  adapter: 'mongo',
+  host: 'localhost',
+  port: 27017,
+  db: 'VerifyApostille',
+  url: 'mongodb://localhost:27017/VerifyApostille', // user, password and port optional
+
+
   // url: 'mongodb://user:password@localhost:27017/dbname', // user, password and port optional
 
   /***************************************************************************
@@ -89,7 +95,7 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // collection: 'sessions',
+   collection: 'sessions',
   // stringify: true,
   // mongoOptions: {
   //   server: {

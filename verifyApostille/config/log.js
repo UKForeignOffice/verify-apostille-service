@@ -10,6 +10,76 @@
  * http://sailsjs.org/#!/documentation/concepts/Logging
  */
 
+var winston = require('winston');
+var moment = require('moment');
+
+var customLogger = new winston.Logger({
+    transports: [
+        /*Log info to console*/
+        new (winston.transports.Console)({
+            timestamp: function() {
+                return Date.now();
+            },
+            formatter: function(options) {
+                return moment(options.timestamp()).format('DD-MM-YY@HH:mm:ss') +' '+ options.level.toUpperCase() +' '+ (undefined !== options.message ? options.message : '') +
+                    (options.meta && Object.keys(options.meta).length ? '\n\t'+ JSON.stringify(options.meta) : '' );
+            },
+            name: 'info-console',
+            level: 'info',
+            handleExceptions: true,
+            humanReadableUnhandledException: true
+        }),
+        /*Log info to file */
+        new (winston.transports.File)({
+            timestamp: function() {
+                return Date.now();
+            },
+            formatter: function(options) {
+                return moment(options.timestamp()).format('DD-MM-YY@HH:mm:ss') +' '+ options.level.toUpperCase() +' '+ (undefined !== options.message ? options.message : '') +
+                    (options.meta && Object.keys(options.meta).length ? '\n\t'+ JSON.stringify(options.meta) : '' );
+            },
+            name: 'info-file',
+            filename: 'logs/fco-ver-apos-service-info.log',
+            level: 'info',
+            handleExceptions: true,
+            humanReadableUnhandledException: true,
+            json: false
+        }),
+        /*Log errors to file */
+        new (winston.transports.File)({
+            timestamp: function() {
+                return Date.now();
+            },
+            formatter: function(options) {
+                return moment(options.timestamp()).format('DD-MM-YY@HH:mm:ss') +' '+ options.level.toUpperCase() +' '+ (undefined !== options.message ? options.message : '') +
+                    (options.meta && Object.keys(options.meta).length ? '\n\t'+ JSON.stringify(options.meta) : '' );
+            },
+            name: 'error-file',
+            filename: 'logs/fco-ver-apos-service-error.log',
+            level: 'error',
+            handleExceptions: true,
+            humanReadableUnhandledException: true,
+            json: false
+        }),
+        /*Log errors to console */
+        new (winston.transports.Console)({
+            timestamp: function() {
+                return Date.now();
+            },
+            formatter: function(options) {
+                return moment(options.timestamp()).format('DD-MM-YY@HH:mm:ss') +' '+ options.level.toUpperCase() +' '+ (undefined !== options.message ? options.message : '') +
+                    (options.meta && Object.keys(options.meta).length ? '\n\t'+ JSON.stringify(options.meta) : '' );
+            },
+            name: 'error-console',
+            level: 'error',
+            handleExceptions: true,
+            humanReadableUnhandledException: true
+        })
+    ]
+});
+
+customLogger.log('info', 'test message %s', 'my string');
+
 module.exports.log = {
 
   /***************************************************************************
@@ -25,5 +95,10 @@ module.exports.log = {
   ***************************************************************************/
 
   // level: 'info'
+  level: 'verbose',
+
+  colors: true,  // To get clean logs without prefixes or color codings
+  custom: customLogger
+
 
 };
