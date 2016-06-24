@@ -6,6 +6,7 @@
   "keywords": [],
   "dependencies": {
     "continuation-local-storage": "^3.1.7",
+    "connect-mongo": "^0.8.2",
     "dotenv": "^2.0.0",
     "ejs": "2.3.4",
     "govuk-elements-sass": "1.1.4",
