@@ -12,6 +12,7 @@ var dotenv = require('dotenv');
 var env = dotenv.config();
 var applicationDatabase = JSON.parse(env.APPLICATIONDATABASE);
 var session = JSON.parse(env.THESESSION);
+var customurls = JSON.parse(env.CUSTOMURLS);
 var apostilleRegex = JSON.parse(env.APOSTILLEREGEX);
 
 var config = {
@@ -45,6 +46,9 @@ var config = {
         "cookie": {
             "maxAge": 1800000
         }
+    },
+    "customURLs": {
+        "mongoURL": customurls.mongoURL
     },
     apostRegex: apostilleRegex.regex
 };
