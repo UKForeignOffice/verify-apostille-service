@@ -24,6 +24,7 @@
     "grunt-sass": "^1.2.0",
     "grunt-sync": "0.2.4",
     "include-all": "~0.1.6",
+    "moment": "^2.11.0",
     "node-sass": "^3.7.0",
     "pg": "^5.0.0",
     "pg-hstore": "^2.3.2",
