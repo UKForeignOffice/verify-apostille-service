@@ -4,18 +4,13 @@
 */
 var verifyApostilleDetails = {
 
-    timestamps: false,
-
-    createdAt: false,
-    updatedAt: false,
-
     attributes: {
         ApostilleNumber: {
             type: Sequelize.STRING
         },
         DateIssued: {
-            type: Sequelize.DATEONLY
-        },    
+            type:Sequelize.DATE
+        },
         SignedBy: {
             type: Sequelize.STRING
         },    
@@ -32,6 +27,8 @@ var verifyApostilleDetails = {
     },
 
     options: {
+        createdAt: false,
+        updatedAt: false,
         freezeTableName: false,
         tableName: 'VerifyApostille',
         classMethods: {},

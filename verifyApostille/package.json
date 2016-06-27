@@ -5,8 +5,8 @@
   "description": "FCO Verify Apostille Service",
   "keywords": [],
   "dependencies": {
-    "continuation-local-storage": "^3.1.7",
     "connect-mongo": "^0.8.2",
+    "continuation-local-storage": "^3.1.7",
     "dotenv": "^2.0.0",
     "ejs": "2.3.4",
     "govuk-elements-sass": "1.1.4",
@@ -25,7 +25,7 @@
     "grunt-sass": "^1.2.0",
     "grunt-sync": "0.2.4",
     "include-all": "~0.1.6",
-    "moment": "^2.11.0",
+    "moment": "^2.13.0",
     "node-sass": "^3.7.0",
     "pg": "^5.0.0",
     "pg-hstore": "^2.3.2",

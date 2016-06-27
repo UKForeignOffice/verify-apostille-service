@@ -3,6 +3,8 @@
  * @module Controller AposilleDetailsController
  */
 
+var moment = require('moment');
+
 var apostilleDetailsController = {
     openApostillePage: function(req,res){
 
@@ -20,6 +22,7 @@ var apostilleDetailsController = {
     printApostille: function(req,res){
         console.log("JFS: Session Data : ", req.session);
         return res.view('printApostille.ejs',{
+            moment: moment,
             apostPrint: true,
             ApostilleNumber: req.session.apostilleNumber,
             DateIssued: req.session.dateIssued,
@@ -78,6 +81,8 @@ var apostilleDetailsController = {
                 }
             }
         }).then(function(result) {
+
+
             req.session.apostilleNumber = result.ApostilleNumber;
             req.session.dateIssued = result.DateIssued;
             req.session.signedBy = result.SignedBy;
@@ -88,6 +93,7 @@ var apostilleDetailsController = {
             console.log("APOSTILLE NUMBER FOUND: ", result);
 
             return res.view('apostille-details.ejs', {
+                moment: moment,
                 ApostilleNumber: req.session.apostilleNumber,
                 DateIssued: req.session.dateIssued,
                 SignedBy: req.session.signedBy,

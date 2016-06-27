@@ -18,7 +18,7 @@
             </tr>
             <tr class="apostRow">
                 <td class="aspostLabelCell"><b>Date of issue</b></td> 
-                <td><%= DateIssued%></td>
+                <td><%= moment(DateIssued).format('Do MMMM YYYY')%></td>
             </tr>
             <tr class="apostRow">
                 <td class="aspostLabelCell"><b>Has been signed by</b></td>
