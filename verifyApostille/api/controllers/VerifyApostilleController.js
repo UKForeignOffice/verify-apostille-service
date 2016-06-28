@@ -106,11 +106,18 @@ var apostilleDetailsController = {
             sails.log(error);
             console.log(error);
             req.session.errCnt++;
+
+            errors = [];
+            errors.push({link:"ApostNumber", message:"Unable to verify Apostille number."});
+            if (req.session.errCnt > 2 ){
+                errors.push({
+                    link:"ApostNumber",
+                    message: "Please email verifyapostille@fco.gov.uk with the Apostille number and date."
+                });
+            }
+
             return res.view('verifyApostille.ejs', {
-                error_report:[ {
-                    link:"ApostNumber",  
-                    message:"Unable to verify Apostille number."
-                }],
+                error_report: errors,
                 apost_number : req.body.ApostNumber,
                 apost_dd : req.body.ApostDay,
                 apost_mm: req.body.ApostMonth,
