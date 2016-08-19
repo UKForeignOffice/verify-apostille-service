@@ -6,6 +6,11 @@
 var moment = require('moment');
 
 var apostilleDetailsController = {
+
+    healthCheck: function(req,res){
+        res.json({ message: 'verify-apostille-service running' });
+    },
+
     openApostillePage: function(req,res){
 
         req.session.errCnt = 0; // TODO: Might want to clear this at elsewhere.
@@ -38,14 +43,14 @@ var apostilleDetailsController = {
         var errors = [];
 
          if(!req.body.ApostDay.match(/\d{1,2}/) || !req.body.ApostMonth.match(/\d{1,2}/) || !req.body.ApostYear.match(/\d{4}/) ){
-            errors.push({link:"date-container", message:"Unfortunately we can't validate the Apostille date entered, please check that the date format is correct"})
+            errors.push({link:"date-container", message:"Enter a valid date"})
         }
 
         // Apostille number regular expression is picked up from the environment config file.
         // e.g. /^[a-zA-Z]\d{6,7}/ matches for one leading alphabetic followed by 6 or 7 numerics.
 
         if(!req.body.ApostNumber.match( eval(sails.config.apostRegex) )){
-            errors.push({link:"ApostNumber", message:"Please enter the complete Apostille number"})
+            errors.push({link:"ApostNumber", message:"Enter a complete apostille number"})
         }
 
         if(errors.length > 0){
@@ -54,7 +59,7 @@ var apostilleDetailsController = {
             if (req.session.errCnt > 2 ){
                 errors.push({
                     link:"ApostNumber",
-                    message: "Please email verifyapostille@fco.gov.uk with the Apostille number and date."
+                    message: "Please email verifyapostille@fco.gov.uk with the apostille number and date."
                 });
             }
 
@@ -108,7 +113,8 @@ var apostilleDetailsController = {
             req.session.errCnt++;
 
             errors = [];
-            errors.push({link:"ApostNumber", message:"Unable to verify Apostille number."});
+            errors.push({link:"date-container", message:"Check the date."});
+                errors.push({link:"ApostNumber", message:"Check the apostille number."});
             if (req.session.errCnt > 2 ){
                 errors.push({
                     link:"ApostNumber",
