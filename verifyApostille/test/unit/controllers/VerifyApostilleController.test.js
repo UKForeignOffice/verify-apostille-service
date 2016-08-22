@@ -69,7 +69,7 @@ describe('VerifyApostilleController', function() {
                 .post('/details')
                 .send({
                     ApostNumber : '65268674545848547',
-                    ApostDay : '11',
+                    ApostDay : '44545',
                     ApostMonth : '07',
                     ApostYear : '2016'
                 })
