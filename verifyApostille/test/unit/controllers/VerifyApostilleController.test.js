@@ -69,9 +69,9 @@ describe('VerifyApostilleController', function() {
                 .post('/details')
                 .send({
                     ApostNumber : '65268674545848547',
-                    ApostDay : '44545',
-                    ApostMonth : '07',
-                    ApostYear : '2016'
+                    ApostDay : 'dff',
+                    ApostMonth : 'ag',
+                    ApostYear : 'aga'
                 })
                 .expect(200,done);
         });
