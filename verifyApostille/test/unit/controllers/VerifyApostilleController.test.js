@@ -3,7 +3,7 @@ var request = require('supertest'),
 
 
 describe('VerifyApostilleController', function() {
-    var user
+    var user;
 
     describe('#healthCheck()', function() {
         it('should return health check JSON', function (done) {

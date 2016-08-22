@@ -34,7 +34,6 @@
     "sails-disk": "~0.10.9",
     "sails-hook-sequelize": "^1.0.1",
     "sails-mongo": "^0.12.0",
-    "sails-postgresql": "^0.11.4",
     "sequelize": "^3.23.3",
     "winston": "^2.1.1"
   },
