@@ -37,9 +37,12 @@ var config = {
     "session": {
         "secret": session.secret,
         "adapter": session.adapter,
-        "host": session.host,
-        "db": session.db,
-        "port": session.port,
+        "url" :customurls.mongoURL,/*
+         "host": session.host,
+         "db": session.db,
+         "port": session.port,
+         "user": session.user,
+         "password": session.password,*/
         "collection": session.collection,
         "key": session.key,
         "domain": session.domain,

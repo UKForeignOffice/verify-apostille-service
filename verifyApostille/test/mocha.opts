@@ -1,0 +1,6 @@
+ --timeout 5s
+ --require should
+ --require assert
+ --require chai
+ --reporter spec
+  --ui bdd
