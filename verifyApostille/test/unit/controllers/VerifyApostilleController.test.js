@@ -51,6 +51,30 @@ describe('VerifyApostilleController', function() {
                 })
                 .expect(200,done);
         });
+
+        it('should return apostille results -- unsuccessful', function (done) {
+            user
+                .post('/details')
+                .send({
+                    ApostNumber : 'djkjngkjaodkgjak;hk##lf;kghmjn-1',
+                    ApostDay : '11',
+                    ApostMonth : '07',
+                    ApostYear : '2016'
+                })
+                .expect(200,done);
+        });
+
+        it('should return apostille results -- unsuccessful', function (done) {
+            user
+                .post('/details')
+                .send({
+                    ApostNumber : '65268674545848547',
+                    ApostDay : '11',
+                    ApostMonth : '07',
+                    ApostYear : '2016'
+                })
+                .expect(200,done);
+        });
     });
 
     describe('#findApostille()', function() {
