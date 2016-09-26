@@ -59,7 +59,7 @@ function checkError(id){
                     </legend>
                     <!--label for="ApostNumber" id="apostLabel">What is the apostille number? For example A090123 </label-->
                     <%if(error_report && checkError("ApostNumber")){%><span class="error-message"> Enter apostille number</span><%}%>
-                    <input autocomplete="off" id="ApostNumber" class="form-control form-control-1-3" size="9" maxlength="8" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
+                    <input autocomplete="off" id="ApostNumber" class="form-control form-control-1-3" size="21" maxlength="20" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
                 </div>
 
                 <br />
