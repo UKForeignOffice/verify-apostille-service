@@ -48,8 +48,18 @@ module.exports.http = {
     //   '500'
     // ],
 
+    xssFilter: function(req, res, next) {
+      res.setHeader('X-XSS-Protection', "1; mode=block");
+      next();
+    },
+
+    xContentType: function(req, res, next) {
+      res.setHeader('X-Content-Type-Options', "nosniff");
+        next();
+    },
+
     xframe: require('lusca').xframe('DENY'),
-    xssFilter: require('x-xss-protection').xssFilter,
+    //xssFilter: require('x-xss-protection').xssFilter,
 
     order: [
       'startRequestTimer',
@@ -64,6 +74,7 @@ module.exports.http = {
     //  '$custom',
       'xframe',
       'xssFilter',
+      'xContentType',
       'router',
       'www',
       'favicon',
