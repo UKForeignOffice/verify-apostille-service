@@ -49,7 +49,7 @@
 ****************************************************************************/
 
 // module.exports.csrf = false;
-module.exports.csrf = true;
+//module.exports.csrf = true;
 /****************************************************************************
 *                                                                           *
 * You may also specify more fine-grained settings for CSRF, including the   *
