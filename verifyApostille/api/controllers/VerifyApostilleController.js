@@ -59,7 +59,7 @@ var apostilleDetailsController = {
             if (req.session.errCnt > 2 ){
                 errors.push({
                     link:"ApostNumber",
-                    message: "Please email verifyapostille@fco.gov.uk with the apostille number and date."
+                    message: "Please email verifyapostille@fco.gov.uk with the apostille number and date"
                 });
             }
 
@@ -115,12 +115,12 @@ var apostilleDetailsController = {
                 req.session.errCnt++;
 
                 errors = [];
-                errors.push({link:"date-container", message:"Check the date."});
-                errors.push({link:"ApostNumber", message:"Check the apostille number."});
+                errors.push({link:"date-container", message:"Check the date"});
+                errors.push({link:"ApostNumber", message:"Check the apostille number"});
                 if (req.session.errCnt > 2 ){
                     errors.push({
                         link:"ApostNumber",
-                        message: "Please email verifyapostille@fco.gov.uk with the Apostille number and date."
+                        message: "Please email verifyapostille@fco.gov.uk with the Apostille number and date"
                     });
                 }
 

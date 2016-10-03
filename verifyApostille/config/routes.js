@@ -32,7 +32,8 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
 
-    '/': { view: 'homepage' },
+    //'/': { view: 'homepage' },
+    '/'        : 'VerifyApostilleController.openApostillePage',
     '/verify'  : 'VerifyApostilleController.openApostillePage',
     '/details' : 'VerifyApostilleController.findApostille',
     '/print'   : 'VerifyApostilleController.printApostille',
