@@ -43,14 +43,16 @@ var apostilleDetailsController = {
         var errors = [];
 
         if(!req.body.ApostDay.match(/\d{1,2}/) || !req.body.ApostMonth.match(/\d{1,2}/) || !req.body.ApostYear.match(/\d{4}/) ){
-            errors.push({link:"date-container", message:"Enter a valid date"})
+            //errors.push({link:"date-container", message:"Enter a valid date"})
+            errors.push({link:"date-container", message:"Check the date"})
         }
 
         // Apostille number regular expression is picked up from the environment config file.
         // e.g. /^[a-zA-Z]\d{6,7}/ matches for one leading alphabetic followed by 6 or 7 numerics.
 
         if(!req.body.ApostNumber.match( eval(sails.config.apostRegex) )){
-            errors.push({link:"ApostNumber", message:"Enter a complete apostille number"})
+            //errors.push({link:"ApostNumber", message:"Enter a complete apostille number"})
+            errors.push({link:"ApostNumber", message:"Check the apostille number"})
         }
 
         if(errors.length > 0){
@@ -59,7 +61,7 @@ var apostilleDetailsController = {
             if (req.session.errCnt > 2 ){
                 errors.push({
                     link:"ApostNumber",
-                    message: "Please email verifyapostille@fco.gov.uk with the apostille number and date"
+                    message: "If you need further help email verifyapostille@fco.gov.uk with the apostille number and date"
                 });
             }
 
@@ -120,7 +122,7 @@ var apostilleDetailsController = {
                 if (req.session.errCnt > 2 ){
                     errors.push({
                         link:"ApostNumber",
-                        message: "Please email verifyapostille@fco.gov.uk with the Apostille number and date"
+                        message: "If you need further help email verifyapostille@fco.gov.uk with the apostille number and date"
                     });
                 }
 
