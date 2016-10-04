@@ -84,7 +84,9 @@ var apostilleDetailsController = {
         console.log(req.body);
         VerifyApostilleDetails.findOne({
             where: {
-                ApostilleNumber: req.body.ApostNumber,
+                ApostilleNumber: {
+                    $iLike: req.body.ApostNumber
+                },
                 DateIssued: {
                     $between: [startDate , endDate]
                 }
