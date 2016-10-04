@@ -53,7 +53,12 @@ var config = {
     "customURLs": {
         "mongoURL": customurls.mongoURL
     },
-    apostRegex: apostilleRegex.regex
+    apostRegex: apostilleRegex.regex,
+    "views": {
+        "locals":{
+            piwikID: session.piwikId,
+        }
+    },
 };
 
 module.exports = config;
