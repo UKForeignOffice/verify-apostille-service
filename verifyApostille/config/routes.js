@@ -34,6 +34,7 @@ module.exports.routes = {
 
     //'/': { view: 'homepage' },
     '/'        : 'VerifyApostilleController.openApostillePage',
+    '/VerifyApostille' : 'VerifyApostilleController.openApostillePage',
     '/verify'  : 'VerifyApostilleController.openApostillePage',
     '/details' : 'VerifyApostilleController.findApostille',
     '/print'   : 'VerifyApostilleController.printApostille',
