@@ -48,6 +48,40 @@ module.exports.http = {
     //   '500'
     // ],
 
+    xssFilter: function(req, res, next) {
+      res.setHeader('X-XSS-Protection', "1; mode=block");
+      next();
+    },
+
+    xContentType: function(req, res, next) {
+      res.setHeader('X-Content-Type-Options', "nosniff");
+        next();
+    },
+
+    xframe: require('lusca').xframe('DENY'),
+    //xssFilter: require('x-xss-protection').xssFilter,
+
+    order: [
+      'startRequestTimer',
+      'cookieParser',
+      'session',
+      'myRequestLogger',
+      'bodyParser',
+      'handleBodyParserError',
+      'compress',
+      'methodOverride',
+      'poweredBy',
+    //  '$custom',
+      'xframe',
+      'xssFilter',
+      'xContentType',
+      'router',
+      'www',
+      'favicon',
+      '404',
+      '500'
+    ],
+
   /****************************************************************************
   *                                                                           *
   * Example custom middleware; logs each request to the console.              *
@@ -77,7 +111,7 @@ module.exports.http = {
 
     // bodyParser: require('skipper')({strict: true})
 
-  },
+  }
 
   /***************************************************************************
   *                                                                          *

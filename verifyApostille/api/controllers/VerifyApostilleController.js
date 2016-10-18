@@ -6,6 +6,11 @@
 var moment = require('moment');
 
 var apostilleDetailsController = {
+
+    healthCheck: function(req,res){
+        res.json({ message: 'verify-apostille-service running' });
+    },
+
     openApostillePage: function(req,res){
 
         req.session.errCnt = 0; // TODO: Might want to clear this at elsewhere.
@@ -37,15 +42,17 @@ var apostilleDetailsController = {
         console.log("APOSTILLE NUMBER input RES: ", req.body);
         var errors = [];
 
-         if(!req.body.ApostDay.match(/\d{1,2}/) || !req.body.ApostMonth.match(/\d{1,2}/) || !req.body.ApostYear.match(/\d{4}/) ){
-            errors.push({link:"date-container", message:"Unfortunately we can't validate the Apostille date entered, please check that the date format is correct"})
+        if(!req.body.ApostDay.match(/\d{1,2}/) || !req.body.ApostMonth.match(/\d{1,2}/) || !req.body.ApostYear.match(/\d{4}/) ){
+            //errors.push({link:"date-container", message:"Enter a valid date"})
+            errors.push({link:"date-container", message:"Check the date"})
         }
 
         // Apostille number regular expression is picked up from the environment config file.
         // e.g. /^[a-zA-Z]\d{6,7}/ matches for one leading alphabetic followed by 6 or 7 numerics.
 
         if(!req.body.ApostNumber.match( eval(sails.config.apostRegex) )){
-            errors.push({link:"ApostNumber", message:"Please enter the complete Apostille number"})
+            //errors.push({link:"ApostNumber", message:"Enter a complete apostille number"})
+            errors.push({link:"ApostNumber", message:"Check the apostille number"})
         }
 
         if(errors.length > 0){
@@ -54,7 +61,7 @@ var apostilleDetailsController = {
             if (req.session.errCnt > 2 ){
                 errors.push({
                     link:"ApostNumber",
-                    message: "Please email verifyapostille@fco.gov.uk with the Apostille number and date."
+                    message: "If you need further help email verifyapostille@fco.gov.uk with the apostille number and date"
                 });
             }
 
@@ -73,9 +80,13 @@ var apostilleDetailsController = {
         var startDate = req.body.ApostDay + "-" + req.body.ApostMonth + "-" + req.body.ApostYear + " 00:00:00";
         var endDate = req.body.ApostDay + "-" + req.body.ApostMonth + "-" + req.body.ApostYear + " 23:59:59";
 
+
+        console.log(req.body);
         VerifyApostilleDetails.findOne({
             where: {
-                ApostilleNumber: req.body.ApostNumber,
+                ApostilleNumber: {
+                    $iLike: req.body.ApostNumber
+                },
                 DateIssued: {
                     $between: [startDate , endDate]
                 }
@@ -102,21 +113,29 @@ var apostilleDetailsController = {
                 IssuedBy: req.session.IssuedBy
             });
         })
-        .catch( function(error) {
-            sails.log(error);
-            console.log(error);
-            req.session.errCnt++;
-            return res.view('verifyApostille.ejs', {
-                error_report:[ {
-                    link:"ApostNumber",  
-                    message:"Unable to verify Apostille number."
-                }],
-                apost_number : req.body.ApostNumber,
-                apost_dd : req.body.ApostDay,
-                apost_mm: req.body.ApostMonth,
-                apost_yyyy: req.body.ApostYear
+            .catch( function(error) {
+                sails.log(error);
+                console.log(error);
+                req.session.errCnt++;
+
+                errors = [];
+                errors.push({link:"date-container", message:"Check the date"});
+                errors.push({link:"ApostNumber", message:"Check the apostille number"});
+                if (req.session.errCnt > 2 ){
+                    errors.push({
+                        link:"ApostNumber",
+                        message: "If you need further help email verifyapostille@fco.gov.uk with the apostille number and date"
+                    });
+                }
+
+                return res.view('verifyApostille.ejs', {
+                    error_report: errors,
+                    apost_number : req.body.ApostNumber,
+                    apost_dd : req.body.ApostDay,
+                    apost_mm: req.body.ApostMonth,
+                    apost_yyyy: req.body.ApostYear
+                });
             });
-        });
     }
 };
 module.exports = apostilleDetailsController;

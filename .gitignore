@@ -6,3 +6,4 @@
 .idea/*/*.xml
 .env
 .idea/scopes/scope_settings.xml
+verifyApostille/linting.xml
