@@ -1,0 +1,8 @@
+/node_modules
+/coverage
+/views
+/assets/js/dependencies
+/assets/js/_bootstrap-submenu.js
+
+/tests/dependencies
+/www
