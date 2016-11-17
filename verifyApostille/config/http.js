@@ -55,7 +55,13 @@ module.exports.http = {
 
     xContentType: function(req, res, next) {
       res.setHeader('X-Content-Type-Options', "nosniff");
-        next();
+      next();
+    },
+
+    disablePoweredBy: function(request, response, next) {
+      var expressApp = sails.hooks.http.app;
+      expressApp.disable('x-powered-by');
+      next();
     },
 
     xframe: require('lusca').xframe('DENY'),
@@ -70,8 +76,9 @@ module.exports.http = {
       'handleBodyParserError',
       'compress',
       'methodOverride',
-      'poweredBy',
-    //  '$custom',
+      //  'poweredBy',
+      //  '$custom',
+      'disablePoweredBy',
       'xframe',
       'xssFilter',
       'xContentType',
