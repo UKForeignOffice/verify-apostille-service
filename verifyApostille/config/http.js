@@ -48,6 +48,12 @@ module.exports.http = {
     //   '500'
     // ],
 
+    disablePoweredBy: function(request, response, next) {
+      var expressApp = sails.hooks.http.app;
+      expressApp.disable('x-powered-by');
+      next();
+    },
+
     order: [
       'startRequestTimer',
       'cookieParser',
@@ -57,8 +63,9 @@ module.exports.http = {
       'handleBodyParserError',
       'compress',
       'methodOverride',
-      'poweredBy',
+    //  'poweredBy',
     //  '$custom',
+      'disablePoweredBy',
       'router',
       'www',
       'favicon',

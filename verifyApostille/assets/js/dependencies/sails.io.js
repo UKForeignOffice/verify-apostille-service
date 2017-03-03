@@ -121,9 +121,9 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
    * @type {Dictionary}
    */
   var CONNECTION_METADATA_PARAMS = {
-    version: '__sails_io_sdk_version',
-    platform: '__sails_io_sdk_platform',
-    language: '__sails_io_sdk_language'
+    version: 'version',
+    platform: 'platform',
+    language: 'language'
   };
 
 
@@ -149,9 +149,9 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
   // Build `versionString` (a querystring snippet) by
   // combining SDK_INFO and CONNECTION_METADATA_PARAMS.
   SDK_INFO.versionString =
-    CONNECTION_METADATA_PARAMS.version + '=' + SDK_INFO.version + '&' +
-    CONNECTION_METADATA_PARAMS.platform + '=' + SDK_INFO.platform + '&' +
-    CONNECTION_METADATA_PARAMS.language + '=' + SDK_INFO.language;
+    CONNECTION_METADATA_PARAMS.version + '=' + 'secret' + '&' +
+    CONNECTION_METADATA_PARAMS.platform + '=' + 'secret' + '&' +
+    CONNECTION_METADATA_PARAMS.language + '=' + 'secret';
 
 
 
@@ -861,23 +861,7 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
          */
         self.on('connect', function socketConnected() {
           self.isConnecting = false;
-          consolog.noPrefix(
-            '\n' +
-            '\n' +
-            // '    |>    ' + '\n' +
-            // '  \\___/  '+️
-            // '\n'+
-             '  |>    Now connected to Sails.' + '\n' +
-            '\\___/   For help, see: http://bit.ly/1DmTvgK' + '\n' +
-             '        (using sails.io.js '+io.sails.sdk.platform+' SDK @v'+io.sails.sdk.version+')'+ '\n' +
-            '\n'+
-            '\n'+
-            // '\n'+
-            ''
-            // ' ⚓︎ (development mode)'
-            // 'e.g. to send a GET request to Sails via WebSockets, run:'+ '\n' +
-            // '`io.socket.get("/foo", function serverRespondedWith (body, jwr) { console.log(body); })`'+ '\n' +
-          );
+          consolog.noPrefix();
         });
 
         self.on('disconnect', function() {
