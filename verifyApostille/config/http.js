@@ -48,18 +48,11 @@ module.exports.http = {
     //   '500'
     // ],
 
-    xssFilter: function(req, res, next) {
-      res.setHeader('X-XSS-Protection', "1; mode=block");
+    disablePoweredBy: function(request, response, next) {
+      var expressApp = sails.hooks.http.app;
+      expressApp.disable('x-powered-by');
       next();
     },
-
-    xContentType: function(req, res, next) {
-      res.setHeader('X-Content-Type-Options', "nosniff");
-        next();
-    },
-
-    xframe: require('lusca').xframe('DENY'),
-    //xssFilter: require('x-xss-protection').xssFilter,
 
     order: [
       'startRequestTimer',
@@ -70,11 +63,9 @@ module.exports.http = {
       'handleBodyParserError',
       'compress',
       'methodOverride',
-      'poweredBy',
+    //  'poweredBy',
     //  '$custom',
-      'xframe',
-      'xssFilter',
-      'xContentType',
+      'disablePoweredBy',
       'router',
       'www',
       'favicon',

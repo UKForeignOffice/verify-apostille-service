@@ -9,7 +9,7 @@
 
 var Sequelize = require('sequelize');
 var dotenv = require('dotenv');
-var env = dotenv.config();
+var env = dotenv.config({path: process.env.DOTENV || '.env'});
 var applicationDatabase = JSON.parse(env.APPLICATIONDATABASE);
 var session = JSON.parse(env.THESESSION);
 var customurls = JSON.parse(env.CUSTOMURLS);
