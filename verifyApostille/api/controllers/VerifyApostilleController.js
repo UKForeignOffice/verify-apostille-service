@@ -26,7 +26,10 @@ var apostilleDetailsController = {
 
     printApostille: function(req,res){
         console.log("JFS: Session Data : ", req.session);
-        return res.view('printApostille.ejs',{
+        if (req.session.apostilleNumber === undefined) {
+          return res.redirect('/verify');
+        } else {
+          return res.view('printApostille.ejs',{
             moment: moment,
             apostPrint: true,
             ApostilleNumber: req.session.apostilleNumber,
@@ -35,7 +38,9 @@ var apostilleDetailsController = {
             ActingCapacityOf: req.session.actingCapacityOf,
             BearsStampSeal: req.session.BearsStampSeal,
             IssuedBy: req.session.IssuedBy
-        });
+          });
+        }
+
     },
 
     findApostille: function(req, res) {
