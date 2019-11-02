@@ -35,7 +35,7 @@
     "sails-disk": "0.10.9",
     "sails-hook-sequelize": "1.0.1",
     "sails-mongo": "0.12.0",
-    "sequelize": "3.23.6",
+    "sequelize": "5.21.2",
     "winston": "^2.1.1",
     "x-xss-protection": "^1.0.0"
   },
