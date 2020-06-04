@@ -1,2 +1,3 @@
-# verify-apostille-service
-Verify an Apostille Service
+# verifyApostille
+
+a [Sails](http://sailsjs.org) application
