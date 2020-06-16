@@ -4,6 +4,7 @@
 */
 module.exports = {
     datastore: 'ApplicationDatabase',
+    tableName: 'VerifyApostille',
     attributes: {
         id: {
             type: 'number',
