@@ -15,7 +15,6 @@
 var dotenv = require('dotenv');
 var env = dotenv.config({path: process.env.DOTENV || '.env'});
 var applicationDatabase = JSON.parse(env.APPLICATIONDATABASE);
-console.log(applicationDatabase)
 
 module.exports.datastores = {
 
