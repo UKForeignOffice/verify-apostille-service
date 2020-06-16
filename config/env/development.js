@@ -24,7 +24,7 @@ var config = {
          "user": session.user,
          "password": session.password,*/
         "collection": session.collection,
-        "key": session.key,
+        "name": session.key,
         "domain": session.domain,
         "cookie": {
             "maxAge": 1800000
