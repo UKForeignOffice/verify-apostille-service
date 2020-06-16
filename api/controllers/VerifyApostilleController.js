@@ -79,25 +79,20 @@ var apostilleDetailsController = {
             });
         }
 
+        console.log(`Looking for Apostille ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
 
-        console.log("JFS: session: ", req.session);
-
-        var startDate = req.body.ApostDay + "-" + req.body.ApostMonth + "-" + req.body.ApostYear + " 00:00:00";
-        var endDate = req.body.ApostDay + "-" + req.body.ApostMonth + "-" + req.body.ApostYear + " 23:59:59";
+        var startDate = req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay + " 00:00:00";
+        var endDate = req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay + " 23:59:59";
 
 
-        console.log(req.body);
-        VerifyApostilleDetails.findOne({
+        VerifyApostille.findOne({
             where: {
-                ApostilleNumber: {
-                    $iLike: req.body.ApostNumber
-                },
+                ApostilleNumber: req.body.ApostNumber.toUpperCase(),
                 DateIssued: {
-                    $between: [startDate , endDate]
+                    ">=": startDate, "<": endDate
                 }
             }
         }).then(function(result) {
-
 
             req.session.apostilleNumber = result.ApostilleNumber;
             req.session.dateIssued = result.DateIssued;
@@ -106,7 +101,7 @@ var apostilleDetailsController = {
             req.session.BearsStampSeal = result.BearsStampSeal;
             req.session.IssuedBy = result.IssuedBy;
 
-            console.log("APOSTILLE NUMBER FOUND: ", result);
+            console.log("Found Apostille: ", result);
 
             return res.view('apostille-details.ejs', {
                 moment: moment,

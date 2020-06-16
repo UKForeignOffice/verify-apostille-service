@@ -16,7 +16,7 @@ var customurls = JSON.parse(env.CUSTOMURLS);
 var apostilleRegex = JSON.parse(env.APOSTILLEREGEX);
 
 var config = {
-    connections:  {ApplicationDatabase: {
+  datastores:  {ApplicationDatabase: {
         adapter: 'sails-postgresql',
         host: applicationDatabase.host,
         user: applicationDatabase.user,

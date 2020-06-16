@@ -1,0 +1,7 @@
+{
+    "hooks": {
+        "orm": true,
+        "sockets": false,
+        "pubsub": false
+    }
+}
