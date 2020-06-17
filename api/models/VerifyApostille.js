@@ -12,23 +12,23 @@ module.exports = {
             required: true
         },
         ApostilleNumber: {
-          type: 'string'
+            type: 'string'
         },
         DateIssued: {
-          type: 'string',
-          columnType: 'date'
+            type: 'ref',
+            columnType: 'timestamp'
         },
         SignedBy: {
-          type: 'string'
+            type: 'string'
         },
         ActingCapacityOf: {
-          type: 'string'
+            type: 'string'
         },
         BearsStampSeal: {
-          type: 'string'
+            type: 'string'
         },
         IssuedBy: {
-          type: 'string'
+            type: 'string'
         }
     }
 };
