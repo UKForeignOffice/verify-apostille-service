@@ -1,6 +1,7 @@
 var request = require('supertest'),
     agent = request.agent;
-
+var chai = require('chai')
+var expect = chai.expect
 
 describe('VerifyApostilleController', function() {
     var user;
@@ -12,7 +13,7 @@ describe('VerifyApostilleController', function() {
                 .get('/healthcheck')
                 .expect(200)
                 .end(function(err, res) {
-                    res.body.message.should.equal('verify-apostille-service running');
+                    expect(res.body.message).to.equal('verify-apostille-service running')
                     done();
                 });
         });
@@ -95,6 +96,5 @@ describe('VerifyApostilleController', function() {
                 .expect(200,done);
         });
     });
-
 
 });
