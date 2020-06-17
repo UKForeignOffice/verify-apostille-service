@@ -14,22 +14,22 @@ var customurls = JSON.parse(env.CUSTOMURLS);
 var apostilleRegex = JSON.parse(env.APOSTILLEREGEX);
 //
 var config = {
-    "session": {
-        "secret": session.secret,
-        "adapter": session.adapter,
-        "url" :customurls.mongoURL,/*
-         "host": session.host,
-         "db": session.db,
-         "port": session.port,
-         "user": session.user,
-         "password": session.password,*/
-        "collection": session.collection,
-        "name": session.key,
-        "domain": session.domain,
-        "cookie": {
-            "maxAge": 1800000
-        }
-    },
+    // "session": {
+    //     "secret": session.secret,
+    //     "adapter": session.adapter,
+    //     "url" :customurls.mongoURL,/*
+    //      "host": session.host,
+    //      "db": session.db,
+    //      "port": session.port,
+    //      "user": session.user,
+    //      "password": session.password,*/
+    //     "collection": session.collection,
+    //     "name": session.key,
+    //     "domain": session.domain,
+    //     "cookie": {
+    //         "maxAge": 1800000
+    //     }
+    // },
     "customURLs": {
         "mongoURL": customurls.mongoURL
     },
