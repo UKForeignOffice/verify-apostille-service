@@ -11,7 +11,7 @@ before(function(done) {
         hooks: {
             //"sequelize": require('../'),
             // Load the hook
-            "orm": false,
+            "orm": true,
             "pubsub": false,
             // Skip grunt (unless your hook uses it)
             "grunt": false
