@@ -16,7 +16,6 @@ var session = JSON.parse(env.THESESSION);
 
 
 module.exports.session = {
-
     /***************************************************************************
      *                                                                          *
      * Session secret is automatically generated when your new app is created   *
@@ -24,13 +23,17 @@ module.exports.session = {
      * of your users, forcing them to log in again.                             *
      *                                                                          *
      ***************************************************************************/
-    secret: session.secret,
-
-    adapter: 'connect-mongo',
-
-    // Note: in this URL, `user`, `pass` and `port` are all optional.
-    // url: `mongodb://${session.user}:${session.pass}@${session.host}:${session.user}port/${session.db}`,
-    url: 'mongodb://localhost:27017/',
+    // secret: session.secret,
+    // cookie: {
+    //     maxAge: 1800000,
+    //     secure: true
+    // },
+    //
+    // adapter: 'connect-mongo',
+    //
+    // // Note: in this URL, `user`, `pass` and `port` are all optional.
+    // // url: `mongodb://${session.user}:${session.pass}@${session.host}:${session.user}port/${session.db}`,
+    // url: 'mongodb://localhost:27017/',
 
     //--------------------------------------------------------------------------
     // The following additional options may also be used, if needed:
@@ -43,7 +46,6 @@ module.exports.session = {
     //   server: {
     //     ssl: true
     //   }
-
 
     /***************************************************************************
      *                                                                          *

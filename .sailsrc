@@ -2,6 +2,7 @@
     "hooks": {
         "orm": true,
         "sockets": false,
-        "pubsub": false
+        "pubsub": false,
+        "session": false
     }
 }

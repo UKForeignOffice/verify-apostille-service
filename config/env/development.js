@@ -14,6 +14,12 @@ var customurls = JSON.parse(env.CUSTOMURLS);
 var apostilleRegex = JSON.parse(env.APOSTILLEREGEX);
 //
 var config = {
+    // session: {
+    //     cookie: {
+    //         maxAge: 1800000,
+    //         secure: false
+    //     },
+    // },
     // "session": {
     //     "secret": session.secret,
     //     "adapter": session.adapter,
