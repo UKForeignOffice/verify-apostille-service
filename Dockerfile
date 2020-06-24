@@ -8,6 +8,6 @@ RUN cd /tmp && npm install && \
 WORKDIR /opt/app
 ADD . /opt/app
 
-EXPOSE 3002
+EXPOSE 1337
 ENV NODE_ENV production
-CMD [ "node", "app","3002" ]
+CMD [ "node", "app" ]
