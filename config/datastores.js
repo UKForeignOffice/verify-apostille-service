@@ -12,9 +12,8 @@
  * For more information on configuring datastores, check out:
  * https://sailsjs.com/config/datastores
  */
-var dotenv = require('dotenv');
-var env = dotenv.config({path: process.env.DOTENV || '.env'});
-var applicationDatabase = JSON.parse(env.APPLICATIONDATABASE);
+require('dotenv').config()
+var applicationDatabase = JSON.parse(process.env.APPLICATIONDATABASE);
 
 module.exports.datastores = {
 

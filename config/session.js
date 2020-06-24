@@ -9,12 +9,6 @@
  * https://sailsjs.com/config/session
  */
 
-var dotenv = require('dotenv');
-var env = dotenv.config({path: process.env.DOTENV || '.env'});
-var applicationDatabase = JSON.parse(env.APPLICATIONDATABASE);
-var session = JSON.parse(env.THESESSION);
-
-
 module.exports.session = {
     /***************************************************************************
      *                                                                          *

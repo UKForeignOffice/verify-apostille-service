@@ -7,12 +7,12 @@
  *
  */
 
-var dotenv = require('dotenv');
-var env = dotenv.config({path: process.env.DOTENV || '.env'});
-var applicationDatabase = JSON.parse(env.APPLICATIONDATABASE);
-var session = JSON.parse(env.THESESSION);
-var customurls = JSON.parse(env.CUSTOMURLS);
-var apostilleRegex = JSON.parse(env.APOSTILLEREGEX);
+require('dotenv').config()
+
+var applicationDatabase = JSON.parse(process.env.APPLICATIONDATABASE);
+var session = JSON.parse(process.env.THESESSION);
+var customurls = JSON.parse(process.env.CUSTOMURLS);
+var apostilleRegex = JSON.parse(process.env.APOSTILLEREGEX);
 
 var config = {
     // datastores: {
