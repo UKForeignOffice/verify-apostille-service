@@ -1,5 +1,5 @@
 # base image
-FROM node:6
+FROM node:12
 
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm install && \
@@ -9,5 +9,5 @@ WORKDIR /opt/app
 ADD . /opt/app
 
 EXPOSE 3002
-ENV NODE_ENV testi
-CMD [ "node", "server","3002" ]
+ENV NODE_ENV production
+CMD [ "node", "app","3002" ]
