@@ -1,5 +1,5 @@
 # base image
-FROM node:12
+FROM node:12.18.1-alpine3.11
 
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm install && \
