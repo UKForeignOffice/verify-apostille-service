@@ -1,0 +1,5 @@
+.gitignore
+.nvmrc
+Dockerfile
+README.md
+scripts/*
