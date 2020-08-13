@@ -7,9 +7,19 @@ ul {
   padding-left: 40px;
   padding-bottom: 20px; }
 
-.hide {
+.hide, printHide {
   display:none;
 }
+
+@media print {
+  #global-header, .actionButtons {
+    display: none;
+  }
+  .printHide{
+    display: block;
+  }
+}
+
 // Activate class of noJs for when js is disabled (mainly for doc selector)
 .noJs{display:none;width:0;height:0;text-indent:-99999}
 // fix styles
