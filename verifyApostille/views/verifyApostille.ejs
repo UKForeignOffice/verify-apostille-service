@@ -1,4 +1,8 @@
-<% pageTitle = "Verify an apostille - GOV.UK" %>
+<%if (typeof(error_report)!='undefined' && error_report) {
+    pageTitle = "Error: Verify an apostille - GOV.UK"
+} else {
+    pageTitle = "Verify an apostille - GOV.UK"
+}%>
 <%
 function checkError(id){
     for(var i=0;i<error_report.length;i++) {
@@ -82,3 +86,10 @@ function checkError(id){
         </form>
     </div>
 </div>
+<%if (typeof(error_report)!='undefined' && error_report) {%>
+<script>
+    var error_summary_element = document.querySelector('#error-summary-heading')
+    error_summary_element.scrollIntoView()
+    error_summary_element.focus()
+</script>
+<%}%>
