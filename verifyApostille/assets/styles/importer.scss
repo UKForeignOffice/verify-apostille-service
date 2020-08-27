@@ -54,7 +54,7 @@ $path : '../images/govuk_frontend_toolkit/';
   @include phase-banner($state: beta);
 }
 
-
+@import "../../node_modules/govuk-frontend/govuk/components/summary-list/summary-list";
 
 //INFORMED CSS
 @import "informed";

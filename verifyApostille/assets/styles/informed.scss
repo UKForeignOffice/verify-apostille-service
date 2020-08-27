@@ -250,3 +250,21 @@ input[type="text"].apostNoText {
 input:focus, textarea:focus, select:focus, button:focus {
   outline: 3px solid #ffdd00;
 }
+
+/* Overwriting some govuk-frontend/govuk/components/summary-list/summary-list values due having both front-end frameworks */
+.govuk-summary-list {
+  font-family: "nta", Arial, sans-serif;
+  font-size: 16px;
+}
+
+  @media (min-width: 40.0625em) {
+    .govuk-summary-list {
+      font-size: 19px;
+    }
+  }
+
+  @media print {
+    .govuk-summary-list {
+      font-size: 14pt;
+    }
+  }

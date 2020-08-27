@@ -8,35 +8,56 @@
             </header>
 
             <div class="inner">
-                <table class="resultItem">
-                    <tr class="apostRow">
-                        <td class="aspostLabelCell"><b>Apostille number</b></td>
-                        <td><%= ApostilleNumber%></td>
-                    </tr>
-                    <tr class="apostRow">
-                        <td class="aspostLabelCell"><b>Date of issue</b></td>
-                        <td><%= moment(DateIssued).format('Do MMMM YYYY')%></td>
-                    </tr>
-                    <tr class="apostRow">
-                        <td class="aspostLabelCell"><b>Has been signed by</b></td>
-                        <td><%= SignedBy%></td>
-                    </tr>
-                    <tr class="apostRow">
-                        <td class="aspostLabelCell"><b>Acting in the capacity of</b></td>
-                        <td><%= ActingCapacityOf%></td>
-                    </tr>
-
-                    <tr class="apostRow">
-                        <td class="aspostLabelCell"><b>Bears the stamp / seal of</b></td>
-                        <td><%= BearsStampSeal%></td>
-                    </tr>
-
-                    <tr class="apostRow">
-                        <td class="aspostLabelCell"><b>Issued by</b></td>
-                        <td><%= IssuedBy%></td>
-                    </tr>
-
-                </table>
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Apostille number
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            <%= ApostilleNumber%>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Date of issue
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            <%= moment(DateIssued).format('D MMMM YYYY')%>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Has been signed by
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            <%= SignedBy%>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Acting in the capacity of
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            <%= ActingCapacityOf%>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Bears the stamp / seal of
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            <%= BearsStampSeal%>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Issued by
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            <%= IssuedBy%>
+                        </dd>
+                    </div>
+                </dl>
                 <p>
                     All paper Apostilles/Legalisation Certificates, issued by the Legalisation Office bear
                     a raised embossed imprint of the Foreign and Commonwealth Office Crest. This embossed imprint should also appear
