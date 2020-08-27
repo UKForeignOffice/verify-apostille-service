@@ -15,23 +15,21 @@ function checkError(id){
 
         <form action="/details" method="post">
             <!--input type='hidden' name='_csrf' value='<%= _csrf %>'-->
-            <fieldset>
-                <legend class="visuallyhidden">Verify an apostille</legend>
+            <%if (typeof(error_report)!='undefined' && error_report) {%>
+            <div class="error-summary" role="group" tabindex="-1">
+                <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
+                    We can't verify this apostille
+                </h2>
+                <ul class="error-summary-list nopadding">
+                    <%for(var i=0;i<error_report.length;i++){%>
+                    <li><a href="#<%= error_report[i].link%>"><%= error_report[i].message%></a></li>
+                    <%}%>
+                </ul>
+            </div>
+            <%}%>
 
-                <%if (typeof(error_report)!='undefined' && error_report) {%>
-                <div class="error-summary" role="group"    tabindex="-1">
-                    <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
-                        We can't verify this apostille
-                    </h2>
-                    <ul class="error-summary-list nopadding">
-                        <%for(var i=0;i<error_report.length;i++){%>
-                        <li><a href="#<%= error_report[i].link%>"><%= error_report[i].message%></a></li>
-                        <%}%>
-                    </ul>
-                </div>
-                <%}%>
-
-                <div class="inline group <%if(error_report && checkError("date-container")){%>error<%}%>" id="date-container" >
+            <div class="inline group <%if(error_report && checkError("date-container")){%>error<%}%>" id="date-container">
+                <fieldset aria-describedby="dob-hint">
                     <legend>
                         <span class="form-label-bold">
                             What is the date of the apostille?
@@ -39,40 +37,48 @@ function checkError(id){
                         <span class="form-hint" id="dob-hint">For example, 31 3 1980</span>
                     </legend>
 
-                    <!--label class="lWidth searchDate">What is the date of the apostille? For example 17 2 1973</label-->
                     <%if(error_report && checkError("date-container")){%><span class="error-message">Check the date</span><%}%>
-                    <label for="ApostDay" class="visually-hidden">Day in dd format</label>
-                    <input class="form-control form-control-1-8" autocomplete="off" id="ApostDay"  size="2" maxlength="2" name="ApostDay" type="text" value="<%= (apost_dd) ? apost_dd : '' %>" />&nbsp;
+                    <div class="apostille-date-input__item">
+                        <div class="group">
+                            <label for="ApostDay">Day</label>
+                            <input class="form-control form-control-1-8 apostille-input--width-2" autocomplete="off" id="ApostDay" size="2" maxlength="2" name="ApostDay" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_dd) ? apost_dd : '' %>" />
+                        </div>
+                    </div>
+                    <div class="apostille-date-input__item">
+                        <div class="group">
+                            <label for="ApostMonth">Month</label>
+                            <input class="form-control form-control-1-8 apostille-input--width-2" autocomplete="off" id="ApostMonth" size="2" maxlength="2" name="ApostMonth" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_mm) ? apost_mm : '' %>" />
+                        </div>
+                    </div>
+                    <div class="apostille-date-input__item">
+                        <div class="group">
+                            <label for="ApostYear">Year</label>
+                            <input class="form-control form-control-1-8 apostille-input--width-4" autocomplete="off" id="ApostYear" size="4" maxlength="4" name="ApostYear" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_yyyy) ? apost_yyyy : '' %>" />
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
 
-                    <label for="ApostMonth" class="visually-hidden">Month in mm format</label>
-                    <input class="form-control form-control-1-8" autocomplete="off" id="ApostMonth" size="2" maxlength="2" name="ApostMonth" type="text" value="<%= (apost_mm) ? apost_mm : '' %>" />&nbsp;
+            <br/>
+            <div class="form-group <%if(error_report && checkError("ApostNumber")){%>error<%}%>">
+                <legend>
+                    <span class="form-label-bold">
+                        <label for="ApostNumber">What is the apostille number?</label>
+                    </span>
+                    <span class="form-hint" id="apostille-hint">For example, A090123 or APO-123</span>
+                </legend>
+                <!--label for="ApostNumber" id="apostLabel">What is the apostille number? For example A090123 or APO-123</label-->
+                <%if(error_report && checkError("ApostNumber")){%><span class="error-message"> Check the apostille number</span><%}%>
+                <input autocomplete="off" id="ApostNumber" class="form-control form-control-1-3" size="21" maxlength="20" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
+            </div>
 
-                    <label for="ApostYear" class="visually-hidden">Year in yyyy format</label>
-                    <input class="form-control form-control-1-8" autocomplete="off" id="ApostYear" size="4" maxlength="4" name="ApostYear" type="text" value="<%= (apost_yyyy) ? apost_yyyy : '' %>" />
-                </div>
+            <br />
 
-                <br/>
-                <div class="form-group <%if(error_report && checkError("ApostNumber")){%>error<%}%>">
-                    <legend>
-                        <span class="form-label-bold">
-                            <label for="ApostNumber">What is the apostille number?</label>
-                        </span>
-                        <span class="form-hint" id="apostille-hint">For example, A090123 or APO-123</span>
-                    </legend>
-                    <!--label for="ApostNumber" id="apostLabel">What is the apostille number? For example A090123 or APO-123</label-->
-                    <%if(error_report && checkError("ApostNumber")){%><span class="error-message"> Check the apostille number</span><%}%>
-                    <input autocomplete="off" id="ApostNumber" class="form-control form-control-1-3" size="21" maxlength="20" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
-                </div>
-
-                <br />
-
-                <p class="action group">
-                    <input class="button" type="submit" value="Verify" id="submitValidation" />   <br /><br />
-                    <!--input class="button-secondary" type="button" value="Clear all data" id="reset" onClick="location.href='/verify';" / -->
-                    <a href="/verify">Clear all data</a>
-                </p>
-
-            </fieldset>
+            <p class="action group">
+                <input class="button" type="submit" value="Verify" id="submitValidation" />   <br /><br />
+                <!--input class="button-secondary" type="button" value="Clear all data" id="reset" onClick="location.href='/verify';" / -->
+                <a href="/verify">Clear all data</a>
+            </p>
         </form>
     </div>
 </div>

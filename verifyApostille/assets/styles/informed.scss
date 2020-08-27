@@ -223,5 +223,18 @@ input[type="text"].apostNoText {
   font-size: 19px;
 }
 
+.apostille-input--width-2 {
+  max-width: 5.4ex;
+  width: inherit;
+}
 
+.apostille-input--width-4 {
+  max-width: 9ex;
+  width: inherit;
+}
 
+.apostille-date-input__item {
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 0;
+}
