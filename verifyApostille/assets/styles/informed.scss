@@ -238,3 +238,7 @@ input[type="text"].apostNoText {
   margin-right: 20px;
   margin-bottom: 0;
 }
+
+.skiplink:link, .skiplink:visited, .skiplink:hover, .skiplink:active, .skiplink:focus {
+  color: #0b0c0c;
+}
