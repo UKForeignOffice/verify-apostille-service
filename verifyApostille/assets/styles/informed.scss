@@ -249,6 +249,8 @@ input[type="text"].apostNoText {
 
 input:focus, textarea:focus, select:focus, button:focus {
   outline: 3px solid #ffdd00;
+  -webkit-box-shadow: inset 0 0 0 2px;
+  box-shadow: inset 0 0 0 2px;
 }
 
 /* Overwriting some govuk-frontend/govuk/components/summary-list/summary-list values due having both front-end frameworks */
