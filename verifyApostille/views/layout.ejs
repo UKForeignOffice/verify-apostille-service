@@ -1,35 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="govuk-template">
 <head>
+    <meta charset="utf-8">
     <title><% if (typeof pageTitle != 'undefined' && pageTitle) { %><%=pageTitle%><%}%></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0c0c">
 
-    <link rel="shortcut icon" href="/favicon.ico?0.15.1" type="image/x-icon" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- Size for iPad and iPad mini (high resolution) -->
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/govuk/images/apple-touch-icon-152x152.png?0.15.1">
-    <!-- Size for iPhone and iPod touch (high resolution) -->
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/govuk/images/apple-touch-icon-120x120.png?0.15.1">
-    <!-- Size for iPad 2 and iPad mini (standard resolution) -->
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/govuk/images/apple-touch-icon-76x76.png?0.15.1">
-    <!-- Default non-defined size, also used for Android 2.1+ devices -->
-    <link rel="apple-touch-icon-precomposed" href="/govuk/images/apple-touch-icon-60x60.png?0.15.1">
+    <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="mask-icon" href="/images/govuk-mask-icon.svg" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/govuk-apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/images/govuk-apple-touch-icon-167x167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/govuk-apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" href="/images/govuk-apple-touch-icon.png">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:image" content="/govuk/images/opengraph-image.png?0.15.1">
-
-    <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <!--[if !IE 8]><!-->
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
+    <!--<![endif]-->
 
-  <script src="/js/jquery-2.1.4.min.js"></script>
-  <script src="/js/main.js"></script>
+    <!--[if IE 8]>
+      <link href="/govuk-frontend/all-ie8.css" rel="stylesheet">
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+      <script src="/html5-shiv/html5shiv.js"></script>
+    <![endif]-->
+
+    <meta property="og:image" content="/images/govuk-opengraph-image.png">
+    <script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/js/main.js"></script>
 </head>
 
 <script> var _paq = _paq || [];</script>
-<body>
+<body class="govuk-template__body">
+<script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 <% if ( typeof apostPrint == 'undefined' ) {%>
 <%- partial ('partials/header.ejs') %>
 <%}%>
