@@ -1,22 +1,17 @@
 <body class="">
 <script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
-<div id="skiplink-container" class="noPrint">
-    <div>
-        <% if (typeof skip_override != 'undefined' && skip_override) { %>
-        <a href="#<%= skip_override.link%>" class="govuk-skip-link"><%= skip_override.message%></a>
-        <%}else{%>
-        <a href="#content" class="govuk-skip-link">Skip to main content</a>
-        <%}%>
-    </div>
-</div>
-
 <div id="global-cookie-message">
   <p>The verify apostille service uses cookies. <a href ="/cookies" target="_blank" >Review your cookie settings.<span class="visually-hidden"> opens in new window</span></a></p>
 </div>
 
 <!--end global-cookie-message-->
 
+<% if (typeof skip_override != 'undefined' && skip_override) { %>
+    <a href="#<%= skip_override.link%>" class="govuk-skip-link"><%= skip_override.message%></a>
+<%}else{%>
+    <a href="#content" class="govuk-skip-link">Skip to main content</a>
+<%}%>
 <header class="govuk-header" role="banner" data-module="govuk-header">
     <div class="govuk-header__container govuk-width-container">
         <div class="govuk-header__logo">
