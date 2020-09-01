@@ -14,14 +14,14 @@ function checkError(id){
 %>
 
 <div id="content" role="main">
-    <h1 class="heading-xlarge">Verify an apostille</h1>
+    <h1 class="govuk-heading-xl">Verify an apostille</h1>
     <div class="column-two-thirds" id="find-apostille">
 
         <form action="/details" method="post">
             <!--input type='hidden' name='_csrf' value='<%= _csrf %>'-->
             <%if (typeof(error_report)!='undefined' && error_report) {%>
             <div class="error-summary" role="group" tabindex="-1">
-                <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
+                <h2 class="govuk-heading-l error-summary-heading" id="error-summary-heading">
                     We can't verify this apostille
                 </h2>
                 <ul class="error-summary-list nopadding">
