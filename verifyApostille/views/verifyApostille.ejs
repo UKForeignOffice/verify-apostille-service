@@ -37,10 +37,10 @@ function checkError(id){
 
             <div class="govuk-form-group <%if(error_report && checkError("date-container")){%>govuk-form-group--error<%}%>" id="date-container">
                 <fieldset aria-describedby="dob-hint" role="group" class="govuk-fieldset">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        <h1 class="govuk-fieldset__heading">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        <h2 class="govuk-fieldset__heading">
                             What is the date of the apostille?
-                        </h1>
+                        </h2>
                     </legend>
                     <div id="dob-hint" class="govuk-hint">
                         For example, 31 3 1980
@@ -79,11 +79,11 @@ function checkError(id){
             </div>
 
             <div class="govuk-form-group <%if(error_report && checkError("ApostNumber")){%>govuk-form-group--error<%}%>">
-                <h1 class="govuk-label-wrapper">
-                    <label class="govuk-label govuk-label--l" for="ApostNumber">
+                <h2 class="govuk-label-wrapper">
+                    <label class="govuk-label govuk-label--m" for="ApostNumber">
                         What is the apostille number?
                     </label>
-                </h1>
+                </h2>
                 <div class="govuk-hint" id="apostille-hint">
                     For example, A090123 or APO-123
                 </div>
