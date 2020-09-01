@@ -20,69 +20,86 @@ function checkError(id){
         <form action="/details" method="post">
             <!--input type='hidden' name='_csrf' value='<%= _csrf %>'-->
             <%if (typeof(error_report)!='undefined' && error_report) {%>
-            <div class="error-summary" role="group" tabindex="-1">
-                <h2 class="govuk-heading-l error-summary-heading" id="error-summary-heading">
+
+            <div class="govuk-error-summary" aria-labelledby="error-summary-heading" role="alert" tabindex="-1" data-module="govuk-error-summary">
+                <h2 class="govuk-error-summary__title" id="error-summary-heading">
                     We can't verify this apostille
                 </h2>
-                <ul class="error-summary-list nopadding">
-                    <%for(var i=0;i<error_report.length;i++){%>
-                    <li><a href="#<%= error_report[i].link%>"><%= error_report[i].message%></a></li>
-                    <%}%>
-                </ul>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <%for(var i=0;i<error_report.length;i++){%>
+                        <li><a href="#<%= error_report[i].link%>"><%= error_report[i].message%></a></li>
+                        <%}%>
+                    </ul>
+                </div>
             </div>
             <%}%>
 
-            <div class="inline group <%if(error_report && checkError("date-container")){%>error<%}%>" id="date-container">
-                <fieldset aria-describedby="dob-hint">
-                    <legend>
-                        <span class="form-label-bold">
+            <div class="govuk-form-group <%if(error_report && checkError("date-container")){%>govuk-form-group--error<%}%>" id="date-container">
+                <fieldset aria-describedby="dob-hint" role="group" class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
                             What is the date of the apostille?
-                        </span>
-                        <span class="form-hint" id="dob-hint">For example, 31 3 1980</span>
+                        </h1>
                     </legend>
-
-                    <%if(error_report && checkError("date-container")){%><span class="error-message">Check the date</span><%}%>
-                    <div class="apostille-date-input__item">
-                        <div class="group">
-                            <label for="ApostDay">Day</label>
-                            <input class="form-control form-control-1-8 apostille-input--width-2" autocomplete="off" id="ApostDay" size="2" maxlength="2" name="ApostDay" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_dd) ? apost_dd : '' %>" />
-                        </div>
+                    <div id="dob-hint" class="govuk-hint">
+                        For example, 31 3 1980
                     </div>
-                    <div class="apostille-date-input__item">
-                        <div class="group">
-                            <label for="ApostMonth">Month</label>
-                            <input class="form-control form-control-1-8 apostille-input--width-2" autocomplete="off" id="ApostMonth" size="2" maxlength="2" name="ApostMonth" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_mm) ? apost_mm : '' %>" />
+                    <%if(error_report && checkError("date-container")){%>
+                        <span id="date-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error: </span>Check the date
+                        </span>
+                    <%}%>
+                    <div class="govuk-date-input"></div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="ApostDay">
+                                    Day
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" autocomplete="off" id="ApostDay" size="2" maxlength="2" name="ApostDay" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_dd) ? apost_dd : '' %>" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="apostille-date-input__item">
-                        <div class="group">
-                            <label for="ApostYear">Year</label>
-                            <input class="form-control form-control-1-8 apostille-input--width-4" autocomplete="off" id="ApostYear" size="4" maxlength="4" name="ApostYear" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_yyyy) ? apost_yyyy : '' %>" />
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="ApostMonth">
+                                    Month
+                                </label>
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" autocomplete="off" id="ApostMonth" size="2" maxlength="2" name="ApostMonth" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_mm) ? apost_mm : '' %>" />
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="ApostYear">
+                                    Year
+                                </label>
+                            <input class="govuk-input govuk-date-input__input govuk-input--width-4 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" autocomplete="off" id="ApostYear" size="4" maxlength="4" name="ApostYear" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_yyyy) ? apost_yyyy : '' %>" />
                         </div>
                     </div>
                 </fieldset>
             </div>
 
-            <br/>
-            <div class="form-group <%if(error_report && checkError("ApostNumber")){%>error<%}%>">
-                <legend>
-                    <span class="form-label-bold">
-                        <label for="ApostNumber">What is the apostille number?</label>
+            <div class="govuk-form-group <%if(error_report && checkError("ApostNumber")){%>govuk-form-group--error<%}%>">
+                <h1 class="govuk-label-wrapper">
+                    <label class="govuk-label govuk-label--l" for="ApostNumber">
+                        What is the apostille number?
+                    </label>
+                </h1>
+                <div class="govuk-hint" id="apostille-hint">
+                    For example, A090123 or APO-123
+                </div>
+                <%if(error_report && checkError("ApostNumber")){%>
+                    <span class="govuk-error-message" id="apostille-error">
+                        <span class="govuk-visually-hidden">Error: </span>Check the apostille number
                     </span>
-                    <span class="form-hint" id="apostille-hint">For example, A090123 or APO-123</span>
-                </legend>
-                <!--label for="ApostNumber" id="apostLabel">What is the apostille number? For example A090123 or APO-123</label-->
-                <%if(error_report && checkError("ApostNumber")){%><span class="error-message"> Check the apostille number</span><%}%>
-                <input autocomplete="off" id="ApostNumber" class="form-control form-control-1-3" size="21" maxlength="20" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
+                <%}%>
+                <input class="govuk-input govuk-input--width-20 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" aria-describedby="apostille-hint <%if(error_report && checkError("ApostNumber")){%>apostille-error<%}%>" autocomplete="off" id="ApostNumber" maxlength="20" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
             </div>
 
+            <button class="govuk-button" type="submit" id="submitValidation">
+                Verify
+            </button>
             <br />
-
-            <p class="action group">
-                <input class="button" type="submit" value="Verify" id="submitValidation" />   <br /><br />
-                <!--input class="button-secondary" type="button" value="Clear all data" id="reset" onClick="location.href='/verify';" / -->
-                <a href="/verify" class="govuk-link">Clear all data</a>
-            </p>
+            <a href="/verify" class="govuk-link">Clear all data</a>
         </form>
     </div>
 </div>
