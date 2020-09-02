@@ -13,7 +13,7 @@ function checkError(id){
 }
 %>
 
-<div id="content" role="main">
+<section id="content" role="main">
     <h1 class="govuk-heading-xl">Verify an apostille</h1>
     <div id="find-apostille">
 
@@ -56,7 +56,7 @@ function checkError(id){
                                 <label class="govuk-label govuk-date-input__label" for="ApostDay">
                                     Day
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" autocomplete="off" id="ApostDay" size="2" maxlength="2" name="ApostDay" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_dd) ? apost_dd : '' %>" />
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2 <%if(error_report && checkError("date-container")){%>govuk-input--error<%}%>" autocomplete="off" id="ApostDay" size="2" maxlength="2" name="ApostDay" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_dd) ? apost_dd : '' %>" />
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
@@ -64,7 +64,7 @@ function checkError(id){
                                 <label class="govuk-label govuk-date-input__label" for="ApostMonth">
                                     Month
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" autocomplete="off" id="ApostMonth" size="2" maxlength="2" name="ApostMonth" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_mm) ? apost_mm : '' %>" />
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2 <%if(error_report && checkError("date-container")){%>govuk-input--error<%}%>" autocomplete="off" id="ApostMonth" size="2" maxlength="2" name="ApostMonth" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_mm) ? apost_mm : '' %>" />
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
@@ -72,7 +72,7 @@ function checkError(id){
                                 <label class="govuk-label govuk-date-input__label" for="ApostYear">
                                     Year
                                 </label>
-                            <input class="govuk-input govuk-date-input__input govuk-input--width-4 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" autocomplete="off" id="ApostYear" size="4" maxlength="4" name="ApostYear" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_yyyy) ? apost_yyyy : '' %>" />
+                            <input class="govuk-input govuk-date-input__input govuk-input--width-4 <%if(error_report && checkError("date-container")){%>govuk-input--error<%}%>" autocomplete="off" id="ApostYear" size="4" maxlength="4" name="ApostYear" type="text" pattern="[0-9]*" inputmode="numeric" value="<%= (apost_yyyy) ? apost_yyyy : '' %>" />
                         </div>
                     </div>
                 </fieldset>
@@ -104,7 +104,7 @@ function checkError(id){
             </div>
         </form>
     </div>
-</div>
+</section>
 <%if (typeof(error_report)!='undefined' && error_report) {%>
 <script>
     var error_summary_element = document.querySelector('#error-summary-heading')
