@@ -95,11 +95,13 @@ function checkError(id){
                 <input class="govuk-input govuk-input--width-20 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" aria-describedby="apostille-hint <%if(error_report && checkError("ApostNumber")){%>apostille-error<%}%>" autocomplete="off" id="ApostNumber" maxlength="20" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
             </div>
 
-            <button class="govuk-button" type="submit" id="submitValidation">
-                Verify
-            </button>
-            <br />
-            <a href="/verify" class="govuk-link">Clear all data</a>
+            <div>
+                <button class="govuk-button" type="submit" id="submitValidation">
+                    Verify
+                </button>
+                <br />
+                <a href="/verify" class="govuk-link">Clear all data</a>
+            </div>
         </form>
     </div>
 </div>

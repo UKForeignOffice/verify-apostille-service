@@ -62,21 +62,18 @@
             </div>
         </dl>
 
-        <p class="govuk-body-s">
+        <p class="govuk-body">
             All paper apostilles (legalisation certificates) issued by the Legalisation Office bear a raised and embossed imprint of the Foreign and Commonwealth Office crest.
             This embossed imprint should also appear immediately below on the document to which the apostille is attached.
         </p>
 
         <!--input data-val="true" data-val-number="The field LogId must be a number." data-val-required="The LogId field is required." id="LogId" name="LogId" type="hidden" value="45837" /><input data-val="true" data-val-length="The field Apostille Number must be a string with a maximum length of 20." data-val-length-max="20" data-val-required="The Apostille Number field is required." id="ApostilleNumber" name="ApostilleNumber" type="hidden" value="K938863" /><input data-val="true" data-val-date="The field DateIssued must be a date." data-val-required="The DateIssued field is required." id="DateIssued" name="DateIssued" type="hidden" value="09/04/2016 08:45:03" / -->
 
-		<div class="step current">
-			<p class="action group">
-				<a class="button" href="/verify">Start again</a>
-				<br />
-				<br />
-				<input type="button" value="Print" onclick=" PrintWin(); " class="button-secondary" />
-			</p>
-		</div>
+        <div>
+            <a class="govuk-button" draggable="false" href="/verify">Start again</a>
+            <br />
+            <input type="button" value="Print" onclick=" PrintWin(); " class="govuk-button govuk-button--secondary" />
+        </div>
 	</div>
 
         <script type="text/javascript">
