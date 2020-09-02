@@ -13,8 +13,10 @@ function checkError(id){
 }
 %>
 
-<section id="content">
-    <h1 class="govuk-heading-xl">Verify an apostille</h1>
+<h1 class="govuk-heading-xl">Verify an apostille</h1>
+
+<section id="content" class="govuk-grid-row">
+<div class="govuk-grid-column-two-thirds">
     <div id="find-apostille">
 
         <form action="/details" method="post">
@@ -104,6 +106,7 @@ function checkError(id){
             </div>
         </form>
     </div>
+</div>
 </section>
 <%if (typeof(error_report)!='undefined' && error_report) {%>
 <script>
