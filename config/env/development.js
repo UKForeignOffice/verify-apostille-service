@@ -8,42 +8,12 @@
 //  */
 //
 require('dotenv').config()
-var session = JSON.parse(process.env.THESESSION);
-var customurls = JSON.parse(process.env.CUSTOMURLS);
-var apostilleRegex = JSON.parse(process.env.APOSTILLEREGEX);
+var applicationDatabase = JSON.parse(process.env.APPLICATIONDATABASE);
+
 //
 var config = {
-    // session: {
-    //     cookie: {
-    //         maxAge: 1800000,
-    //         secure: false
-    //     },
-    // },
-    // "session": {
-    //     "secret": session.secret,
-    //     "adapter": session.adapter,
-    //     "url" :customurls.mongoURL,/*
-    //      "host": session.host,
-    //      "db": session.db,
-    //      "port": session.port,
-    //      "user": session.user,
-    //      "password": session.password,*/
-    //     "collection": session.collection,
-    //     "name": session.key,
-    //     "domain": session.domain,
-    //     "cookie": {
-    //         "maxAge": 1800000
-    //     }
-    // },
-    "customURLs": {
-        "mongoURL": customurls.mongoURL
-    },
-    apostRegex: apostilleRegex.regex,
-    "views": {
-        "locals":{
-            piwikID: session.piwikId,
-        }
-    }
+    apostRegex: applicationDatabase.regex,
+    piwikID: applicationDatabase.piwikId,
 };
 //
 module.exports = config;
