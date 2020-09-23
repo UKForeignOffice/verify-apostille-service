@@ -61,9 +61,9 @@
     </p>
 
     <div>
-        <a class="govuk-button" draggable="false" href="/verify" role="button">Start again</a>
+        <a class="govuk-button actionButtons" draggable="false" href="/verify" role="button">Start again</a>
         <br />
-        <button onclick=" PrintWin(); " class="govuk-button govuk-button--secondary">
+        <button onclick="window.print()" class="govuk-button govuk-button--secondary actionButtons">
             Print
         </button>
     </div>
@@ -77,11 +77,6 @@
             if (win != null) {
                 win.close();
             }
-        }
-
-        function PrintWin() {
-            var url = '/print';
-            win = window.open(url, 'winPrint', 'height=500,width=650,toolbar=0,location=0,status=0,menubar=0');
         }
 
     </script>

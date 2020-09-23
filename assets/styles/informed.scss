@@ -31,3 +31,12 @@
       #global-cookie-message p {
         font-size: 14px;
         line-height: 1.14286; } }
+
+@media print {
+  .govuk-header, .actionButtons , .govuk-footer {
+    display: none;
+  }
+  .printHide{
+    display: block;
+  }
+}
