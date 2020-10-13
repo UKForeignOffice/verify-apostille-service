@@ -41,6 +41,7 @@ module.exports.routes = {
 
     '/terms-and-conditions'                         : { view: 'legalPages/terms' },
     '/cookies'                                      : { view: 'legalPages/cookies' },
+    '/cookie-details'                                : { view: 'legalPages/cookieDetails' },
     '/accessibility-statement'                      : { view: 'legalPages/accessibilityStatement' },
 
     'get /healthcheck' : 'VerifyApostilleController.healthcheck'

@@ -1,3 +1,6 @@
+
+<script src="/js/cookie-functions.js"></script>
+
 <% if (typeof skip_override != 'undefined' && skip_override) { %>
     <a href="#<%= skip_override.link%>" class="govuk-skip-link"><%= skip_override.message%></a>
 <%}else{%>
@@ -5,7 +8,23 @@
 <%}%>
 
 <div id="global-cookie-message">
-  <p>The verify apostille service uses cookies. <a href ="/cookies" target="_blank" class="govuk-link">Review your cookie settings.<span class="govuk-visually-hidden"> opens in new window</span></a></p>
+    <p><b>Tell us whether you accept cookies</b></p>
+    <br>
+    <p> We use <a class="govuk-link" href="/cookies">cookies to collect information</a> about how you use GOV.UK. We use this information to make the website work as well as possible and improve government services.</p>
+    <p>
+        <br>
+        <button id="accept-all-cookies" class="govuk-button" typeof="submit">Agree all Cookies</button>
+        <button id="preference-cookies" class="govuk-button">Set cookie preferences</button>
+    </p>
+</div>
+
+<div id="confirmation-cookie-message" style="display: none">
+    <br>
+    <p> You’ve accepted all cookies. You can  <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.
+        <span style="float:right">
+        <a class="govuk-link" href="" id="hide-confirmation">Hide</a>
+    </span>
+    </p>
 </div>
 
 <!--end global-cookie-message-->
