@@ -8,25 +8,31 @@
 <%}%>
 
 <div id="global-cookie-message">
-    <p><b>Tell us whether you accept cookies</b></p>
-    <br>
-    <p> We use <a class="govuk-link" href="/cookies">cookies to collect information</a> about how you use GOV.UK. We use this information to make the website work as well as possible and improve government services.</p>
-    <p>
-        <br>
-        <button id="accept-all-cookies" class="govuk-button" typeof="submit">Agree all Cookies</button>
-        <button id="preference-cookies" class="govuk-button">Set cookie preferences</button>
-    </p>
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+                <div style="margin-bottom: 10px">
+                    <h2 class="govuk-heading-m">Tell us whether you accept cookies</h2>
+                    <p class="govuk-body" style="width:100%">We use <a class="govuk-link" href="/cookies">cookies to collect information</a> about how you use GOV.UK. We use this information to make the website work as well as possible and improve government services.</p>
+                </div>
+                <div>
+                    <button id="accept-all-cookies" class="govuk-button" typeof="submit">Agree all Cookies</button>
+                    <button id="preference-cookies" class="govuk-button">Set cookie preferences</button>
+                </div>
+        </div>
+    </div>
 </div>
 
 <div id="confirmation-cookie-message" style="display: none">
-    <br>
-    <p> You’ve accepted all cookies. You can  <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.
-        <span style="float:right">
-        <a class="govuk-link" href="" id="hide-confirmation">Hide</a>
-    </span>
-    </p>
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+            <div>
+                <p class="govuk-body" style="width:100%">You’ve accepted all cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.
+                    <span style="float:right"><a class="govuk-link" href="" id="hide-confirmation">Hide</a></span>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
-
 <!--end global-cookie-message-->
 
 <header class="govuk-header" role="banner" data-module="govuk-header">
