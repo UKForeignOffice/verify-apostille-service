@@ -70,8 +70,8 @@
         //get values from preferences check boxes and save to session
         var essential = true;
         var usage = (document.getElementById("radio-web_cookie-1").checked) ? true : false;
-        var campaigns = (document.getElementById("radio-marketing-cookie-1").checked) ? true : false;
-        var settings = (document.getElementById("radio-settings-cookie-1").checked) ? true : false;
+        var campaigns = false;
+        var settings = false;
 
         var consent = {
             'essential': essential,
