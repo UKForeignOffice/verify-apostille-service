@@ -84,7 +84,6 @@ var apostilleDetailsController = {
                 }
             }
         }).then(function(result) {
-            // If we match lower OR upper case APO number, we are done. Return.
             if (result && result !== 'undefined') {
                 console.log("Found Apostille: ", result);
 
@@ -98,69 +97,43 @@ var apostilleDetailsController = {
                     IssuedBy: result.IssuedBy
                 });
             }
-            // If nothing found, convert to upper case and double check (in case user used lower case)
             else {
-                // Change to upper case for search, in case the user accidentally used lower case
-                req.body.ApostNumber = req.body.ApostNumber.toUpperCase();
+                console.log(`Did not find an apostille for those details. ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
+                errors = [];
+                errors.push({link: "date-container", message: "Check the date"});
+                errors.push({link: "ApostNumber", message: "Check the apostille number"});
+                    errors.push({
+                        link: "ApostNumber",
+                        message: "If you need further help email verifyapostille@fco.gov.uk with the apostille number and date"
+                    });
 
-                VerifyApostille.findOne({
-                    where: {
-                        ApostilleNumber: req.body.ApostNumber,
-                        DateIssued: {
-                            ">=": startDate, "<": endDate
-                        }
-                    }
-                }).then(function(result) {
-                    if (result && result !== 'undefined') {
-                        console.log("Found Apostille: ", result);
-        
-                        return res.view('apostille-details.ejs', {
-                            moment: moment,
-                            ApostilleNumber: result.ApostilleNumber,
-                            DateIssued: result.DateIssued,
-                            SignedBy: result.SignedBy,
-                            ActingCapacityOf: result.ActingCapacityOf,
-                            BearsStampSeal: result.BearsStampSeal,
-                            IssuedBy: result.IssuedBy
-                        });
-                    } else {
-                        console.log(`Did not find an apostille for those details. ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
-                        errors = [];
-                        errors.push({link: "date-container", message: "Check the date"});
-                        errors.push({link: "ApostNumber", message: "Check the apostille number"});
-                            errors.push({
-                                link: "ApostNumber",
-                                message: "If you need further help email verifyapostille@fco.gov.uk with the apostille number and date"
-                            });
-
-                        return res.view('verifyApostille.ejs', {
-                            error_report: errors,
-                            apost_number: req.body.ApostNumber,
-                            apost_dd: req.body.ApostDay,
-                            apost_mm: req.body.ApostMonth,
-                            apost_yyyy: req.body.ApostYear
-                        });
-                    }
-                })
+                return res.view('verifyApostille.ejs', {
+                    error_report: errors,
+                    apost_number: req.body.ApostNumber,
+                    apost_dd: req.body.ApostDay,
+                    apost_mm: req.body.ApostMonth,
+                    apost_yyyy: req.body.ApostYear
+                });
             }
-        }).catch(function (error) {
-            console.log('error', error)
-            errors = [];
-            errors.push({link: "date-container", message: "Check the date"});
-            errors.push({link: "ApostNumber", message: "Check the apostille number"});
-            errors.push({
-                link: "ApostNumber",
-                message: "If you need further help email verifyapostille@fco.gov.uk with the apostille number and date"
-            });
+        })
+            .catch(function (error) {
+                console.log('error', error)
+                errors = [];
+                errors.push({link: "date-container", message: "Check the date"});
+                errors.push({link: "ApostNumber", message: "Check the apostille number"});
+                errors.push({
+                    link: "ApostNumber",
+                    message: "If you need further help email verifyapostille@fco.gov.uk with the apostille number and date"
+                });
 
-            return res.view('verifyApostille.ejs', {
-                error_report: errors,
-                apost_number: req.body.ApostNumber,
-                apost_dd: req.body.ApostDay,
-                apost_mm: req.body.ApostMonth,
-                apost_yyyy: req.body.ApostYear
+                return res.view('verifyApostille.ejs', {
+                    error_report: errors,
+                    apost_number: req.body.ApostNumber,
+                    apost_dd: req.body.ApostDay,
+                    apost_mm: req.body.ApostMonth,
+                    apost_yyyy: req.body.ApostYear
+                });
             });
-        });
     }
 };
 module.exports = apostilleDetailsController;
