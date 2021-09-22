@@ -29,8 +29,9 @@ module.exports = {
         },
         IssuedBy: {
             type: 'string'
-        }
+        },
+        ApostilleType: {
+            type: 'string'
+        },
     }
 };
-
-
