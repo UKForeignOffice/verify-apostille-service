@@ -35,7 +35,8 @@ var apostilleDetailsController = {
             SignedBy: req.session.signedBy,
             ActingCapacityOf: req.session.actingCapacityOf,
             BearsStampSeal: req.session.BearsStampSeal,
-            IssuedBy: req.session.IssuedBy
+            IssuedBy: req.session.IssuedBy,
+            ApostilleType: req.session.apostilleType,
           });
         }
 
@@ -53,13 +54,13 @@ var apostilleDetailsController = {
         // e.g. /^[a-zA-Z]\d{6,7}/ matches for one leading alphabetic followed by 6 or 7 numerics.
 
         if(!req.body.ApostNumber.match( eval(sails.config.apostRegex) )){
-            errors.push({link:"ApostNumber", message:"Check the apostille number"})
+            errors.push({link:"ApostNumber", message:"Check the Apostille number"})
         }
 
         if(errors.length > 0){
             errors.push({
                 link: "ApostNumber",
-                message: "If you need further help email verifyapostille@fco.gov.uk with the apostille number and date"
+                message: "If you need further help email verifyapostille@fco.gov.uk with the Apostille number and date"
             });
 
             return res.view('verifyApostille.ejs',{
@@ -96,17 +97,18 @@ var apostilleDetailsController = {
                     SignedBy: result.SignedBy,
                     ActingCapacityOf: result.ActingCapacityOf,
                     BearsStampSeal: result.BearsStampSeal,
-                    IssuedBy: result.IssuedBy
+                    IssuedBy: result.IssuedBy,
+                    ApostilleType: result.ApostilleType,
                 });
             }
             else {
                 console.log(`Did not find an apostille for those details. ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
                 errors = [];
                 errors.push({link: "date-container", message: "Check the date"});
-                errors.push({link: "ApostNumber", message: "Check the apostille number"});
+                errors.push({link: "ApostNumber", message: "Check the Apostille number"});
                     errors.push({
                         link: "ApostNumber",
-                        message: "If you need further help email verifyapostille@fco.gov.uk with the apostille number and date"
+                        message: "If you need further help email verifyapostille@fco.gov.uk with the Apostille number and date"
                     });
 
                 return res.view('verifyApostille.ejs', {
@@ -122,10 +124,10 @@ var apostilleDetailsController = {
                 console.log('error', error)
                 errors = [];
                 errors.push({link: "date-container", message: "Check the date"});
-                errors.push({link: "ApostNumber", message: "Check the apostille number"});
+                errors.push({link: "ApostNumber", message: "Check the Apostille number"});
                 errors.push({
                     link: "ApostNumber",
-                    message: "If you need further help email verifyapostille@fco.gov.uk with the apostille number and date"
+                    message: "If you need further help email verifyapostille@fco.gov.uk with the Apostille number and date"
                 });
 
                 return res.view('verifyApostille.ejs', {
