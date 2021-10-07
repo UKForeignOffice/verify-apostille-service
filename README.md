@@ -4,7 +4,7 @@ a [Sails](http://sailsjs.org) application
 
 ## Install
 
-- You will need access to the .env file usually kept in keyspace but if not ask someone form Kainos
+- You will need access to the .env file usually kept in keybase but if not ask someone from Kainos
 - Install dependencies with `npm install`
 - Then run `npm start`
 - Navigate to localhost:1337 in your browser
