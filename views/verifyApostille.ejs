@@ -97,7 +97,7 @@ function checkError(id){
                         <span class="govuk-visually-hidden">Error: </span>Check the Apostille number
                     </span>
                 <%}%>
-                <input class="govuk-input govuk-input--width-20 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" aria-describedby="apostille-hint <%if(error_report && checkError("ApostNumber")){%>apostille-error<%}%>" autocomplete="off" id="ApostNumber" maxlength="20" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
+                <input class="govuk-input govuk-input--width-20 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" aria-describedby="apostille-hint <%if(error_report && checkError("ApostNumber")){%>apostille-error<%}%>" autocomplete="off" id="ApostNumber" maxlength="25" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
             </div>
 
             <div>
