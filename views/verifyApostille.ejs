@@ -13,7 +13,7 @@ function checkError(id){
 }
 %>
 
-<h1 class="govuk-heading-xl">Verify an apostille</h1>
+<h1 class="govuk-heading-xl govuk-!-margin-bottom-0">Apostille details</h1>
 
 <section id="content" class="govuk-grid-row">
 <div class="govuk-grid-column-two-thirds">
@@ -23,9 +23,9 @@ function checkError(id){
             <!--input type='hidden' name='_csrf' value='<%= _csrf %>'-->
             <%if (typeof(error_report)!='undefined' && error_report) {%>
 
-            <div class="govuk-error-summary" aria-labelledby="error-summary-heading" role="alert" tabindex="-1" data-module="govuk-error-summary">
+            <div class="govuk-error-summary govuk-!-margin-top-6" aria-labelledby="error-summary-heading" role="alert" tabindex="-1" data-module="govuk-error-summary">
                 <h2 class="govuk-error-summary__title" id="error-summary-heading">
-                    We can't verify this apostille
+                    We can't verify this Apostille
                 </h2>
                 <div class="govuk-error-summary__body">
                     <ul class="govuk-list govuk-error-summary__list">
@@ -37,15 +37,18 @@ function checkError(id){
             </div>
             <%}%>
 
+            <div class="govuk-inset-text">
+                These details can be found on the Apostille certificate.
+            </div>
             <div class="govuk-form-group <%if(error_report && checkError("date-container")){%>govuk-form-group--error<%}%>" id="date-container">
                 <fieldset aria-describedby="dob-hint" role="group" class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                         <h2 class="govuk-fieldset__heading">
-                            What is the date of the apostille?
+                            Apostille date
                         </h2>
                     </legend>
                     <div id="dob-hint" class="govuk-hint">
-                        For example, 31 3 1980
+                        For example, 31 3 2020
                     </div>
                     <%if(error_report && checkError("date-container")){%>
                         <span id="date-error" class="govuk-error-message">
@@ -83,18 +86,18 @@ function checkError(id){
             <div class="govuk-form-group <%if(error_report && checkError("ApostNumber")){%>govuk-form-group--error<%}%>">
                 <h2 class="govuk-label-wrapper">
                     <label class="govuk-label govuk-label--m" for="ApostNumber">
-                        What is the apostille number?
+                        Apostille number
                     </label>
                 </h2>
                 <div class="govuk-hint" id="apostille-hint">
-                    For example, A090123 or APO-123
+                    For example, A090123 or APO-1234567 or APO-ABCD-1234-EFGH-5678
                 </div>
                 <%if(error_report && checkError("ApostNumber")){%>
                     <span class="govuk-error-message" id="apostille-error">
-                        <span class="govuk-visually-hidden">Error: </span>Check the apostille number
+                        <span class="govuk-visually-hidden">Error: </span>Check the Apostille number
                     </span>
                 <%}%>
-                <input class="govuk-input govuk-input--width-20 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" aria-describedby="apostille-hint <%if(error_report && checkError("ApostNumber")){%>apostille-error<%}%>" autocomplete="off" id="ApostNumber" maxlength="20" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
+                <input class="govuk-input govuk-input--width-20 <%if(error_report && checkError("ApostNumber")){%>govuk-input--error<%}%>" aria-describedby="apostille-hint <%if(error_report && checkError("ApostNumber")){%>apostille-error<%}%>" autocomplete="off" id="ApostNumber" maxlength="25" name="ApostNumber" type="text" value="<%= (apost_number) ? apost_number : '' %>" />
             </div>
 
             <div>

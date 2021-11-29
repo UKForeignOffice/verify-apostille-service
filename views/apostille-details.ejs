@@ -1,9 +1,15 @@
 <% pageTitle = "Apostille verified" %>
 
-<h1 class="govuk-heading-xl">Apostille verified</h1>
+<h1 class="govuk-heading-xl">
+    <% if (ApostilleType === "paper") {%>
+        Apostille verified
+    <% } else { %>
+        e-Apostille verified
+    <% } %>
+</h1>
 
 <section id="content" class="govuk-grid-row">
-<div class="govuk-grid-column-two-thirds">
+<div class="govuk-grid-column-full">
     <dl class="govuk-summary-list">
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
@@ -55,17 +61,29 @@
         </div>
     </dl>
 
-    <p class="govuk-body">
-        All paper apostilles (legalisation certificates) issued by the Legalisation Office bear a raised and embossed imprint of the Foreign, Commonwealth and Development Office crest.
-        This embossed imprint should also appear immediately below on the document to which the apostille is attached.
-    </p>
+    <% if (ApostilleType === "paper") {%>
+        <p class="govuk-body">
+            All paper apostilles (legalisation certificates) issued by the Legalisation Office bear a raised and embossed imprint of the Foreign, Commonwealth and Development Office crest.
+            This embossed imprint should also appear immediately below on the document to which the apostille is attached.
+        </p>
+    <% } else { %>
+        <p class="govuk-body">
+            All electronic Apostilles (e-Apostilles) issued by the Legalisation Office will be in PDF format. The PDF file will bear a digital signature from ‘FCDO Legalisation Office’. It will contain an instructions page with two PDF files attached.
+        </p>
+        <p class="govuk-body">
+            The first PDF attachment will be the Apostille (legalisation certificate) and will bear the same digital signature of ‘FCDO Legalisation Office’. The details shown on the Apostille will match those shown above.
+        </p>
+        <p class="govuk-body">
+            The second PDF attachment will be the public document the Apostille relates to and will be digitally signed by the person shown in the ‘Has been digitally signed by’ section above.
+        </p>
+    <% } %>
 
-    <div>
-        <a class="govuk-button actionButtons" draggable="false" href="/verify" role="button">Start again</a>
-        <br />
+    <div class="govuk-body">
         <button onclick="window.print()" class="govuk-button govuk-button--secondary actionButtons">
             Print
         </button>
+        <br />
+        <a draggable="false" href="/verify" class="govuk-link">Verify another Apostille</a>
     </div>
 
     <script type="text/javascript">
