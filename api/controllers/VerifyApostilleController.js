@@ -42,18 +42,20 @@ var apostilleDetailsController = {
 
     },
 
+    // /details -> findApostile
     findApostille: function(req, res) {
-        console.log("Got Apostille request: ", req.body);
+        console.log("REQUEST QUERY: " + JSON.stringify(req.query));
+
         var errors = [];
 
-        if(!req.body.ApostDay.match(/\d{1,2}/) || !req.body.ApostMonth.match(/\d{1,2}/) || !req.body.ApostYear.match(/\d{4}/) ){
+        if(!req.query.ApostDay.match(/\d{1,2}/) || !req.query.ApostMonth.match(/\d{1,2}/) || !req.query.ApostYear.match(/\d{4}/) ){
             errors.push({link:"date-container", message:"Check the date"})
         }
 
         // Apostille number regular expression is picked up from the environment config file.
         // e.g. /^[a-zA-Z]\d{6,7}/ matches for one leading alphabetic followed by 6 or 7 numerics.
 
-        if(!req.body.ApostNumber.match( eval(sails.config.apostRegex) )){
+        if(!req.query.ApostNumber.match( eval(sails.config.apostRegex) )){
             errors.push({link:"ApostNumber", message:"Check the Apostille number"})
         }
 
@@ -65,23 +67,23 @@ var apostilleDetailsController = {
 
             return res.view('verifyApostille.ejs',{
                 error_report : errors,
-                apost_number : req.body.ApostNumber,
-                apost_dd : req.body.ApostDay,
-                apost_mm: req.body.ApostMonth,
-                apost_yyyy: req.body.ApostYear
+                apost_number : req.query.ApostNumber,
+                apost_dd : req.query.ApostDay,
+                apost_mm: req.query.ApostMonth,
+                apost_yyyy: req.query.ApostYear
             });
         }
 
-        req.body.ApostNumber = req.body.ApostNumber.toUpperCase();
+        req.query.ApostNumber = req.query.ApostNumber.toUpperCase();
 
-        console.log(`Looking for apostille ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
+        console.log(`Looking for apostille ${req.query.ApostNumber} on date ${req.query.ApostYear + "-" + req.query.ApostMonth + "-" + req.query.ApostDay}`)
 
-        var startDate = req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay + " 00:00:00";
-        var endDate = req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay + " 23:59:59";
+        var startDate = req.query.ApostYear + "-" + req.query.ApostMonth + "-" + req.query.ApostDay + " 00:00:00";
+        var endDate = req.query.ApostYear + "-" + req.query.ApostMonth + "-" + req.query.ApostDay + " 23:59:59";
 
         VerifyApostille.findOne({
             where: {
-                ApostilleNumber: req.body.ApostNumber,
+                ApostilleNumber: req.query.ApostNumber,
                 DateIssued: {
                     ">=": startDate, "<": endDate
                 }
@@ -102,7 +104,7 @@ var apostilleDetailsController = {
                 });
             }
             else {
-                console.log(`Did not find an apostille for those details. ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
+                console.log(`Did not find an apostille for those details. ${req.query.ApostNumber} on date ${req.query.ApostYear + "-" + req.query.ApostMonth + "-" + req.query.ApostDay}`)
                 errors = [];
                 errors.push({link: "date-container", message: "Check the date"});
                 errors.push({link: "ApostNumber", message: "Check the Apostille number"});
@@ -113,10 +115,10 @@ var apostilleDetailsController = {
 
                 return res.view('verifyApostille.ejs', {
                     error_report: errors,
-                    apost_number: req.body.ApostNumber,
-                    apost_dd: req.body.ApostDay,
-                    apost_mm: req.body.ApostMonth,
-                    apost_yyyy: req.body.ApostYear
+                    apost_number: req.query.ApostNumber,
+                    apost_dd: req.query.ApostDay,
+                    apost_mm: req.query.ApostMonth,
+                    apost_yyyy: req.query.ApostYear
                 });
             }
         })
@@ -132,10 +134,10 @@ var apostilleDetailsController = {
 
                 return res.view('verifyApostille.ejs', {
                     error_report: errors,
-                    apost_number: req.body.ApostNumber,
-                    apost_dd: req.body.ApostDay,
-                    apost_mm: req.body.ApostMonth,
-                    apost_yyyy: req.body.ApostYear
+                    apost_number: req.query.ApostNumber,
+                    apost_dd: req.query.ApostDay,
+                    apost_mm: req.query.ApostMonth,
+                    apost_yyyy: req.query.ApostYear
                 });
             });
     }
