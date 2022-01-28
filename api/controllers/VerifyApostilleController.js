@@ -43,7 +43,13 @@ var apostilleDetailsController = {
     },
 
     findApostille: function(req, res) {
-        console.log("Got Apostille request: ", req.body);
+        // When the trust proxy setting is true, the value of this property is derived from the left-most entry in the X-Forwarded-For header.
+        console.log("REQUEST IP: "  + req.ip);
+        // When the trust proxy setting is true, this property contains an array of IP addresses specified in the X-Forwarded-For request header.
+        console.log("REQUEST IPs: "  + req.ips);
+        // X-Forwarded-For should be automatically set when using an AWS load balancer
+        console.log("REQUEST HEADER: " + req.headers["X-Forwarded-For"]);
+
         var errors = [];
 
         if(!req.body.ApostDay.match(/\d{1,2}/) || !req.body.ApostMonth.match(/\d{1,2}/) || !req.body.ApostYear.match(/\d{4}/) ){
