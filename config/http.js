@@ -102,7 +102,9 @@ module.exports.http = {
 
     // bodyParser: require('skipper')({strict: true})
 
-  }
+  },
+
+  trustProxy: true
 
   /***************************************************************************
   *                                                                          *
