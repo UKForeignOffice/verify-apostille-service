@@ -48,8 +48,7 @@ var apostilleDetailsController = {
         // When the trust proxy setting is true, this property contains an array of IP addresses specified in the X-Forwarded-For request header.
         console.log("REQUEST IPs: "  + req.ips);
         // X-Forwarded-For should be automatically set when using an AWS load balancer
-        console.log("REQUEST HEADER: " + req.headers["X-Forwarded-For"]);
-        console.log("\nREQ HEADERS" + JSON.stringify(req.headers));
+        console.log("REQUEST HEADER: " + req.headers["x-forwarded-for"]);
 
         var errors = [];
 
