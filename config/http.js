@@ -117,6 +117,4 @@ module.exports.http = {
   ***************************************************************************/
 
   // cache: 31557600000
-
-  // TODO: FCDO-513 - May need to add trustProxy object to enable IP logging if req.ip does not work
 };

@@ -49,6 +49,7 @@ var apostilleDetailsController = {
         console.log("REQUEST IPs: "  + req.ips);
         // X-Forwarded-For should be automatically set when using an AWS load balancer
         console.log("REQUEST HEADER: " + req.headers["X-Forwarded-For"]);
+        console.log("\nREQ HEADERS" + JSON.stringify(req.headers));
 
         var errors = [];
 
