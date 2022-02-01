@@ -44,12 +44,7 @@ var apostilleDetailsController = {
 
     findApostille: function(req, res) {
         // When the trust proxy setting is true, the value of this property is derived from the left-most entry in the X-Forwarded-For header.
-        console.log("REQUEST IP: "  + req.ip);
-        // When the trust proxy setting is true, this property contains an array of IP addresses specified in the X-Forwarded-For request header.
-        console.log("REQUEST IPs: "  + req.ips);
-        // X-Forwarded-For should be automatically set when using an AWS load balancer
-        console.log("REQUEST HEADER: " + req.headers["X-Forwarded-For"]);
-        console.log("\nREQ HEADERS" + JSON.stringify(req.headers));
+        console.log("Got apostille request", req.body);
 
         var errors = [];
 
@@ -81,7 +76,7 @@ var apostilleDetailsController = {
 
         req.body.ApostNumber = req.body.ApostNumber.toUpperCase();
 
-        console.log(`Looking for apostille ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
+        console.log(`${req.ip} Looking for apostille ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
 
         var startDate = req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay + " 00:00:00";
         var endDate = req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay + " 23:59:59";
@@ -95,7 +90,8 @@ var apostilleDetailsController = {
             }
         }).then(function(result) {
             if (result && result !== 'undefined') {
-                console.log("Found Apostille: ", result);
+                let formattedDateIssued = moment(result.DateIssued).format('YYYY-MM-DD');
+                console.log(`${req.ip} Lookup SUCCESS: ${result.ApostilleNumber} on date ${formattedDateIssued}`);
 
                 return res.view('apostille-details.ejs', {
                     moment: moment,
@@ -109,7 +105,7 @@ var apostilleDetailsController = {
                 });
             }
             else {
-                console.log(`Did not find an apostille for those details. ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
+                console.log(`${req.ip} Lookup FAIL: ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
                 errors = [];
                 errors.push({link: "date-container", message: "Check the date"});
                 errors.push({link: "ApostNumber", message: "Check the Apostille number"});
