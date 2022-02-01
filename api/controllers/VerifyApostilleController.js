@@ -90,7 +90,7 @@ var apostilleDetailsController = {
             }
         }).then(function(result) {
             if (result && result !== 'undefined') {
-                console.log(`${req.ip} LOOKUP SUCCESS: ${result.ApostilleNumber} on date ${result.ApostYear} - ${result.ApostMonth} - ${result.ApostDay}`);
+                console.log(`${req.ip} Lookup SUCCESS: ${result.ApostilleNumber} on date ${result.ApostYear} - ${result.ApostMonth} - ${result.ApostDay}`);
 
                 return res.view('apostille-details.ejs', {
                     moment: moment,
@@ -104,7 +104,7 @@ var apostilleDetailsController = {
                 });
             }
             else {
-                console.log(`${req.ip} LOOKUP FAIL: ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
+                console.log(`${req.ip} Lookup FAIL: ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
                 errors = [];
                 errors.push({link: "date-container", message: "Check the date"});
                 errors.push({link: "ApostNumber", message: "Check the Apostille number"});
