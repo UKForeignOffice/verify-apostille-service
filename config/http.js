@@ -104,6 +104,7 @@ module.exports.http = {
 
   },
 
+  // FCDO-513 - Set to true to enable IP logging
   trustProxy: true
 
   /***************************************************************************
