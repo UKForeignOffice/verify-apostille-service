@@ -90,7 +90,8 @@ var apostilleDetailsController = {
             }
         }).then(function(result) {
             if (result && result !== 'undefined') {
-                console.log(`${req.ip} Lookup SUCCESS: ${result.ApostilleNumber} on date ${result.ApostYear} - ${result.ApostMonth} - ${result.ApostDay}`);
+                let formattedDateIssued = moment(result.DateIssued).format('YYYY-MM-DD');
+                console.log(`${req.ip} Lookup SUCCESS: ${result.ApostilleNumber} on date ${formattedDateIssued}`);
 
                 return res.view('apostille-details.ejs', {
                     moment: moment,
