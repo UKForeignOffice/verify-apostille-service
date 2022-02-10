@@ -19,7 +19,7 @@ var IpService = {
         }
     },
     
-    storeIp: async function(ip){
+    storeIp: async function(ip) {
         this.clearIpLogIfNewDay();
     
         var IpLog = await VerifyApostilleIpLog.findOne({
