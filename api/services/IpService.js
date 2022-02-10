@@ -2,25 +2,30 @@ const maxFailedAttempts = 15;
 
 var IpService = {
 
+    //Note: Requires a DIFFERENT IP to call this and unblock if the IP is blocked, as this function is only called
+    // when an incorrect lookup is done
     clearIpLogIfNewDay: async function() {
         var datetime = new Date();
         var day = datetime.getDay();
+        var yesterday = day - 1;
 
-        var IpLog = await VerifyApostilleIpLog.findOne({
+        var IpLog = await VerifyApostilleIpLog.find({
             where: {
-                Day: day - 1
+                Day: yesterday
             }
-        });
+        }).limit(1);
+
+        IpLog = IpLog[0];
 
         if(IpLog != undefined) {
-            if(IpLog.day != day) {
-                VerifyApostilleIpLog.destroy();
+            if(IpLog.Day != day) {
+                await VerifyApostilleIpLog.destroy({});
             }
         }
     },
-    
+
     storeIp: async function(ip) {
-        this.clearIpLogIfNewDay();
+        await this.clearIpLogIfNewDay();
     
         var IpLog = await VerifyApostilleIpLog.findOne({
             id: ip
@@ -51,6 +56,7 @@ var IpService = {
         }
 
         if(IpLog.FailedAttempts >= maxFailedAttempts) return true;
+        else return false;
     }
 };
 
