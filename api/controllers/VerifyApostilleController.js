@@ -49,14 +49,14 @@ var apostilleDetailsController = {
         if(await IpService.shouldIPBeRateLimited(req.ip) == false) {
             var errors = [];
 
-            if(!req.body.ApostDay.match(/\d{1,2}/) || !req.body.ApostMonth.match(/\d{1,2}/) || !req.body.ApostYear.match(/\d{4}/) ){
+            if(!req.body.ApostDay.match(/\d{1,2}/) || !req.body.ApostMonth.match(/\d{1,2}/) || !req.body.ApostYear.match(/\d{4}/) ) {
                 errors.push({link:"date-container", message:"Check the date"})
             }
 
             // Apostille number regular expression is picked up from the environment config file.
             // e.g. /^[a-zA-Z]\d{6,7}/ matches for one leading alphabetic followed by 6 or 7 numerics.
 
-            if(!req.body.ApostNumber.match( eval(sails.config.apostRegex) )){
+            if(!req.body.ApostNumber.match( eval(sails.config.apostRegex) )) {
                 errors.push({link:"ApostNumber", message:"Check the Apostille number"})
             }
 
