@@ -1,34 +1,56 @@
-var ipLog = {};
 const maxFailedAttempts = 15;
 
 var IpService = {
 
-    clearIpLogIfNewDay: function() {
+    clearIpLogIfNewDay: async function() {
         var datetime = new Date();
         var day = datetime.getDay();
 
-        if(ipLog.day != day) {
-            ipLog = {};
-            ipLog.day = day;
+        var IpLog = await VerifyApostilleIpLog.findOne({
+            where: {
+                Day: day - 1
+            }
+        });
+
+        if(IpLog != undefined) {
+            if(IpLog.day != day) {
+                VerifyApostilleIpLog.destroy();
+            }
         }
     },
     
-    storeIp: function(ip, lookupSuccess){
+    storeIp: async function(ip){
         this.clearIpLogIfNewDay();
+    
+        var IpLog = await VerifyApostilleIpLog.findOne({
+            id: ip
+        });
 
-        if(ip == null || lookupSuccess) return;
-
-        if(ipLog[ip] == null){
-            ipLog[ip] = 1;
+        if(IpLog == undefined || IpLog.id == null) {
+            await VerifyApostilleIpLog.create({
+                id: ip,
+                FailedAttempts: 0,
+                Day: new Date().getDay()
+            });
         } else {
-            ipLog[ip]++;
+            await VerifyApostilleIpLog
+                .updateOne({id: IpLog.id})
+                .set({FailedAttempts: IpLog.FailedAttempts + 1});
         }
     },
 
-    shouldIPBeRateLimited: function(ip) {
+    shouldIPBeRateLimited: async function(ip) {
         if(ip == null) return false;
 
-        if(ipLog[ip] >= maxFailedAttempts) return true;
+        var IpLog = await VerifyApostilleIpLog.findOne({
+            id: ip
+        });
+
+        if(IpLog == undefined || IpLog.id == null) {
+            return false;
+        }
+
+        if(IpLog.FailedAttempts >= maxFailedAttempts) return true;
     }
 };
 
