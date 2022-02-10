@@ -125,25 +125,24 @@ var apostilleDetailsController = {
                         apost_yyyy: req.body.ApostYear
                     });
                 }
-            })
-                .catch(function (error) {
-                    console.log('error', error)
-                    errors = [];
-                    errors.push({link: "date-container", message: "Check the date"});
-                    errors.push({link: "ApostNumber", message: "Check the Apostille number"});
-                    errors.push({
-                        link: "ApostNumber",
-                        message: "If you need further help email verifyapostille@fco.gov.uk with the Apostille number and date"
-                    });
-
-                    return res.view('verifyApostille.ejs', {
-                        error_report: errors,
-                        apost_number: req.body.ApostNumber,
-                        apost_dd: req.body.ApostDay,
-                        apost_mm: req.body.ApostMonth,
-                        apost_yyyy: req.body.ApostYear
-                    });
+            }).catch(function (error) {
+                console.log('error', error)
+                errors = [];
+                errors.push({link: "date-container", message: "Check the date"});
+                errors.push({link: "ApostNumber", message: "Check the Apostille number"});
+                errors.push({
+                    link: "ApostNumber",
+                    message: "If you need further help email verifyapostille@fco.gov.uk with the Apostille number and date"
                 });
+
+                return res.view('verifyApostille.ejs', {
+                    error_report: errors,
+                    apost_number: req.body.ApostNumber,
+                    apost_dd: req.body.ApostDay,
+                    apost_mm: req.body.ApostMonth,
+                    apost_yyyy: req.body.ApostYear
+                });
+            });
         } else {
             res.redirect('/rate-limit');
         }
