@@ -43,8 +43,10 @@ var apostilleDetailsController = {
     },
 
     findApostille: function(req, res) {
-        // When the trust proxy setting is true, the value of this property is derived from the left-most entry in the X-Forwarded-For header.
         console.log("Got apostille request", req.body);
+
+        // When the trust proxy setting is true, the value of this property is derived from the left-most entry in the X-Forwarded-For header.
+        if(IpService.shouldIPBeRateLimited(req.ip) == true) res.redirect('/rate-limit');
 
         var errors = [];
 
@@ -90,6 +92,8 @@ var apostilleDetailsController = {
             }
         }).then(function(result) {
             if (result && result !== 'undefined') {
+                IpService.storeIp(req.ip, true);
+
                 let formattedDateIssued = moment(result.DateIssued).format('YYYY-MM-DD');
                 console.log(`${req.ip} Lookup SUCCESS: ${result.ApostilleNumber} on date ${formattedDateIssued}`);
 
@@ -105,6 +109,8 @@ var apostilleDetailsController = {
                 });
             }
             else {
+                IpService.storeIp(req.ip, false);
+
                 console.log(`${req.ip} Lookup FAIL: ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
                 errors = [];
                 errors.push({link: "date-container", message: "Check the date"});
