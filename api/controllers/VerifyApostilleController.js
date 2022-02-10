@@ -44,6 +44,8 @@ var apostilleDetailsController = {
 
     findApostille: function(req, res) {
         console.log("Got apostille request", req.body);
+
+        // req.ip is derived from left-most entry in X-Forwarded-For header
         IpService.shouldIPBeRateLimited(req.ip).then(function(result){
             if(result == false){ 
                 var errors = [];
