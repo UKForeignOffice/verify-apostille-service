@@ -1,5 +1,3 @@
-const maxFailedAttempts = JSON.parse(process.env.MAXFAILEDATTEMPTS);
-
 var IpService = {
 
     clearIpLogIfNewDay: async function() {
@@ -53,7 +51,7 @@ var IpService = {
             return false;
         }
 
-        if(IpLog.FailedAttempts >= maxFailedAttempts) return true;
+        if(IpLog.FailedAttempts >= sails.config.maxFailedAttempts) return true;
         else return false;
     }
 };

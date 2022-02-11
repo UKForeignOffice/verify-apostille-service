@@ -9,11 +9,13 @@
 //
 require('dotenv').config()
 var applicationDatabase = JSON.parse(process.env.APPLICATIONDATABASE);
+const maxFailedAttempts = JSON.parse(process.env.MAXFAILEDATTEMPTS);
 
 //
 var config = {
     apostRegex: applicationDatabase.regex,
     piwikID: applicationDatabase.piwikId,
+    maxFailedAttempts: maxFailedAttempts
 };
 //
 module.exports = config;
