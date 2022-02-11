@@ -1,4 +1,4 @@
-const maxFailedAttempts = 15;
+const maxFailedAttempts = JSON.parse(process.env.MAXFAILEDATTEMPTS);
 
 var IpService = {
 
