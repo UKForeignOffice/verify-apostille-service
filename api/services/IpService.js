@@ -51,8 +51,7 @@ var IpService = {
             return false;
         }
 
-        if(IpLog.FailedAttempts >= sails.config.maxFailedAttempts) return true;
-        else return false;
+        return IpLog.FailedAttempts >= sails.config.maxFailedAttempts;
     }
 };
 
