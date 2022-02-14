@@ -13,6 +13,7 @@ var applicationDatabase = JSON.parse(process.env.APPLICATIONDATABASE);
 var session = JSON.parse(process.env.THESESSION);
 var customurls = JSON.parse(process.env.CUSTOMURLS);
 var apostilleRegex = JSON.parse(process.env.APOSTILLEREGEX);
+const maxFailedAttempts = JSON.parse(process.env.MAXFAILEDATTEMPTS);
 
 var config = {
     // datastores: {
@@ -53,7 +54,8 @@ var config = {
     "customURLs": {
         "mongoURL": customurls.mongoURL
     },
-    apostRegex: apostilleRegex.regex
+    apostRegex: apostilleRegex.regex,
+    maxFailedAttempts: maxFailedAttempts
 };
 
 module.exports = config;
