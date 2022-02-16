@@ -3,11 +3,10 @@ var IpService = {
     clearIpLogIfNewDay: async function() {
         var datetime = new Date();
         var day = datetime.getDay();
-        var yesterday = day - 1;
 
         var IpLog = await VerifyApostilleIpLog.find({
             where: {
-                Day: yesterday
+                Day: {'!=' : day}
             }
         }).limit(1);
 
