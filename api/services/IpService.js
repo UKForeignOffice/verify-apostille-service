@@ -6,7 +6,7 @@ var IpService = {
 
         var IpLog = await VerifyApostilleIpLog.find({
             where: {
-                Day: { '!=' : day}
+                Day: {'!=' : day}
             }
         }).limit(1);
 
