@@ -19,6 +19,7 @@ var IpService = {
         }
     },
 
+    // Called upon failed request to findApostille
     storeIp: async function(ip) {    
         var IpLog = await VerifyApostilleIpLog.findOne({
             id: ip
@@ -31,12 +32,15 @@ var IpService = {
                 Day: new Date().getDay()
             });
         } else {
+            if(IpLog.FailedAttempts == sails.config.maxFailedAttempts - 1) console.log("BLOCKED: " + ip);
+
             await VerifyApostilleIpLog
                 .updateOne({id: IpLog.id})
                 .set({FailedAttempts: IpLog.FailedAttempts + 1});
         }
     },
 
+    // Called upon entry to findApostille
     shouldIPBeRateLimited: async function(ip) {
         await this.clearIpLogIfNewDay();
 
