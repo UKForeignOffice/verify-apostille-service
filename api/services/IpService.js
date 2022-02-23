@@ -50,8 +50,6 @@ var IpService = {
             return false;
         }
 
-        if(IpLog.FailedAttempts == sails.config.maxFailedAttempts) console.log("BLOCKED: " + ip);
-
         return IpLog.FailedAttempts >= sails.config.maxFailedAttempts;
     }
 };
