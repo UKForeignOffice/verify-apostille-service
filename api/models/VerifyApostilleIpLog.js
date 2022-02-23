@@ -12,9 +12,9 @@ module.exports = {
             type: 'number',
             columnType: 'integer'
         },
-        Day: {
-            type: 'number',
-            columnType: 'smallint'
+        BlockedAtInMillis: {
+            type: 'string',
+            columnType: 'bigint'
         }
     }
 };

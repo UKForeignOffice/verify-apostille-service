@@ -107,7 +107,7 @@ var apostilleDetailsController = {
                         });
                     }
                     else {
-                        IpService.storeIp(req.ip);
+                        IpService.logFailedRequestForIp(req.ip);
 
                         console.log(`${req.ip} Lookup FAIL: ${req.body.ApostNumber} on date ${req.body.ApostYear + "-" + req.body.ApostMonth + "-" + req.body.ApostDay}`)
                         errors = [];

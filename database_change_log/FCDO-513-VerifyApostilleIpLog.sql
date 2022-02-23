@@ -1,7 +1,9 @@
+DROP TABLE public."VerifyApostilleIpLog"
+
 CREATE TABLE IF NOT EXISTS public."VerifyApostilleIpLog"
 (
     "Ip" inet NOT NULL,
     "FailedAttempts" integer,
-    "Day" smallint,
+    "BlockedAtInMillis" bigint,
     CONSTRAINT "VerifyApostilleIpLog_pkey" PRIMARY KEY ("Ip")
 )
