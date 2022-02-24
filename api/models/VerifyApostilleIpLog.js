@@ -14,7 +14,7 @@ module.exports = {
         },
         BlockedAt: {
             type: 'string',
-            columnType: 'varchar'
+            columnType: 'varchar(27)'
         }
     }
 };

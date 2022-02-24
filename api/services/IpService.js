@@ -38,7 +38,7 @@ var IpService = {
                 .set(
                     {
                         FailedAttempts: IpLog.FailedAttempts + 1,
-                        BlockedAt: new Date().toString()
+                        BlockedAt: new Date().toISOString()
                     }
                 );
 
