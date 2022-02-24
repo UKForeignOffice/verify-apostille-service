@@ -1,46 +1,55 @@
+const moment = require("moment");
+
 var IpService = {
 
-    clearIpLogIfNewDay: async function() {
-        var datetime = new Date();
-        var day = datetime.getDay();
-
-        var IpLog = await VerifyApostilleIpLog.find({
+    unblockIpsIfDayPassed: async function() {
+        await VerifyApostilleIpLog.destroy({
             where: {
-                Day: {'!=' : day}
+                and: [
+                    { BlockedAt: { '<=' : moment().subtract(1, 'days').toDate() } },
+                    { BlockedAt: { '!=' : "" } }
+                ]
             }
-        }).limit(1);
-
-        IpLog = IpLog[0];
-
-        if(IpLog != undefined) {
-            if(IpLog.Day != day) {
-                await VerifyApostilleIpLog.destroy({});
-            }
-        }
+        })
     },
 
-    storeIp: async function(ip) {    
+    // Called upon failed request to findApostille
+    logFailedRequestForIp: async function(ip) {
         var IpLog = await VerifyApostilleIpLog.findOne({
             id: ip
         });
 
+        // If nothing, make a row, else if 1 off being blocked, inform blocked, else increment
         if(IpLog == undefined || IpLog.id == null) {
             await VerifyApostilleIpLog.create({
                 id: ip,
-                FailedAttempts: 0,
-                Day: new Date().getDay()
+                FailedAttempts: 1,
+                BlockedAt: ""
             });
+        } else if(IpLog.FailedAttempts == sails.config.maxFailedAttempts - 1) {
+            await VerifyApostilleIpLog
+                .updateOne({ id: IpLog.id })
+                .set(
+                    {
+                        FailedAttempts: IpLog.FailedAttempts + 1,
+                        BlockedAt: new Date().toISOString()
+                    }
+                );
+
+            console.log("BLOCKED: " + ip);
         } else {
             await VerifyApostilleIpLog
-                .updateOne({id: IpLog.id})
-                .set({FailedAttempts: IpLog.FailedAttempts + 1});
+                .updateOne({ id: IpLog.id })
+                .set({ FailedAttempts: IpLog.FailedAttempts + 1 });
         }
     },
 
+    // Called upon entry to findApostille
     shouldIPBeRateLimited: async function(ip) {
-        await this.clearIpLogIfNewDay();
-
         if(ip == null) return false;
+
+        // await this.unblockIpIfDayPassed(ip);
+        await this.unblockIpsIfDayPassed();
 
         var IpLog = await VerifyApostilleIpLog.findOne({
             id: ip
