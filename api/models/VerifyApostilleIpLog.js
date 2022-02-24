@@ -12,9 +12,9 @@ module.exports = {
             type: 'number',
             columnType: 'integer'
         },
-        BlockedAtInMillis: {
+        BlockedAt: {
             type: 'string',
-            columnType: 'bigint'
+            columnType: 'varchar'
         }
     }
 };

@@ -1,18 +1,14 @@
 var IpService = {
 
     unblockIpIfDayPassed: async function(ip) {
-        const oneDayInMiliseconds = 60 * 60 * 24 * 1000;
-
         var IpRecord = await VerifyApostilleIpLog.findOne({ id: ip });
 
         if(IpRecord != undefined && IpRecord != null) {
-            // Sails won't allow string num type, as bigint may exceed JS max int value
-            // Max int value as date is well beyond the year 300,000, so the next line should be fine for a while
-            var blockedAtInMillis = parseInt(IpRecord.BlockedAtInMillis);
-
-            if(blockedAtInMillis != 0) {
+            if(IpRecord.BlockedAt != "") {
                 var dateTime = new Date();
-                var dateTimeBlocked = new Date(blockedAtInMillis);
+                var dateTimeBlocked = new Date(IpRecord.BlockedAt);
+
+                const oneDayInMiliseconds = 60 * 60 * 24 * 1000;
                 var dateTimeBlockedPlus24Hours = new Date(dateTimeBlocked.getTime() + oneDayInMiliseconds);
     
                 if(dateTime >= dateTimeBlockedPlus24Hours) {
@@ -34,7 +30,7 @@ var IpService = {
             await VerifyApostilleIpLog.create({
                 id: ip,
                 FailedAttempts: 1,
-                BlockedAtInMillis: 0
+                BlockedAt: ""
             });
         } else if(IpLog.FailedAttempts == sails.config.maxFailedAttempts - 1) {
             await VerifyApostilleIpLog
@@ -42,7 +38,7 @@ var IpService = {
                 .set(
                     {
                         FailedAttempts: IpLog.FailedAttempts + 1,
-                        BlockedAtInMillis: new Date().getTime()
+                        BlockedAt: new Date().toString()
                     }
                 );
 
