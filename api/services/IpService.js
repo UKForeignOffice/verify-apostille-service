@@ -5,11 +5,11 @@ var IpService = {
 
         if(IpRecord != undefined && IpRecord != null) {
             if(IpRecord.BlockedAt != "") {
-                var dateTime = new Date();
-                var dateTimeBlocked = new Date(IpRecord.BlockedAt);
+                const dateTime = new Date();
+                const dateTimeBlocked = new Date(IpRecord.BlockedAt);
 
                 const oneDayInMiliseconds = 60 * 60 * 24 * 1000;
-                var dateTimeBlockedPlus24Hours = new Date(dateTimeBlocked.getTime() + oneDayInMiliseconds);
+                const dateTimeBlockedPlus24Hours = new Date(dateTimeBlocked.getTime() + oneDayInMiliseconds);
     
                 if(dateTime >= dateTimeBlockedPlus24Hours) {
                     await VerifyApostilleIpLog.destroyOne({ id: ip });
