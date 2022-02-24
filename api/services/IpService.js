@@ -1,22 +1,16 @@
+const moment = require("moment");
+
 var IpService = {
 
-    unblockIpIfDayPassed: async function(ip) {
-        var IpRecord = await VerifyApostilleIpLog.findOne({ id: ip });
-
-        if(IpRecord != undefined && IpRecord != null) {
-            if(IpRecord.BlockedAt != "") {
-                const dateTime = new Date();
-                const dateTimeBlocked = new Date(IpRecord.BlockedAt);
-
-                const oneDayInMiliseconds = 60 * 60 * 24 * 1000;
-                const dateTimeBlockedPlus24Hours = new Date(dateTimeBlocked.getTime() + oneDayInMiliseconds);
-    
-                if(dateTime >= dateTimeBlockedPlus24Hours) {
-                    await VerifyApostilleIpLog.destroyOne({ id: ip });
-                    console.log("UNBLOCKED: " + ip);
-                }
+    unblockIpsIfDayPassed: async function() {
+        await VerifyApostilleIpLog.destroy({
+            where: {
+                and: [
+                    { BlockedAt: { '<=' : moment().subtract(1, 'days').toDate() } },
+                    { BlockedAt: { '!=' : "" } }
+                ]
             }
-        }
+        })
     },
 
     // Called upon failed request to findApostille
@@ -54,8 +48,8 @@ var IpService = {
     shouldIPBeRateLimited: async function(ip) {
         if(ip == null) return false;
 
-        // await this.clearIpLogIfNewDay();
-        await this.unblockIpIfDayPassed(ip);
+        // await this.unblockIpIfDayPassed(ip);
+        await this.unblockIpsIfDayPassed();
 
         var IpLog = await VerifyApostilleIpLog.findOne({
             id: ip
