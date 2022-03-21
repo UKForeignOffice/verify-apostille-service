@@ -2,9 +2,11 @@ const moment = require("moment");
 
 var IpService = {
 
+    /**
+     * Delete rows when a day has passed since blocked, 
+     * or when a day has passed since first block and haven't been blocked
+     */
     unblockIpsIfDayPassed: async function() {
-        // Delete rows when a day has passed since blocked, 
-        // or when a day has passed since first block and haven't been blocked
         await VerifyApostilleIpLog.destroy({
             where: {
                 or: [
