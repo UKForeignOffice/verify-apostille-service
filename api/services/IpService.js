@@ -3,14 +3,26 @@ const moment = require("moment");
 var IpService = {
 
     unblockIpsIfDayPassed: async function() {
+        // Delete rows when a day has passed since blocked, 
+        // or when a day has passed since first block and haven't been blocked
         await VerifyApostilleIpLog.destroy({
             where: {
-                and: [
-                    { BlockedAt: { '<=' : moment().subtract(1, 'days').toDate() } },
-                    { BlockedAt: { '!=' : "" } }
+                or: [
+                    {
+                        and: [
+                            { BlockedAt: { '<=' : moment().subtract(1, 'days').toDate() } },
+                            { BlockedAt: { '!=' : "" } }
+                        ]
+                    },
+                    {
+                        and: [
+                            { FirstFailedAttemptAt: { '<=' : moment().subtract(1, 'days').toDate() } },
+                            { BlockedAt: "" }
+                        ]
+                    }
                 ]
             }
-        })
+        });
     },
 
     // Called upon failed request to findApostille
@@ -19,11 +31,12 @@ var IpService = {
             id: ip
         });
 
-        // If nothing, make a row, else if 1 off being blocked, inform blocked, else increment
+        // If nothing, make a row; else if 1 off being blocked, inform blocked; else increment
         if(IpLog == undefined || IpLog.id == null) {
             await VerifyApostilleIpLog.create({
                 id: ip,
                 FailedAttempts: 1,
+                FirstFailedAttemptAt: new Date().toISOString(),
                 BlockedAt: ""
             });
         } else if(IpLog.FailedAttempts == sails.config.maxFailedAttempts - 1) {
@@ -48,7 +61,6 @@ var IpService = {
     shouldIPBeRateLimited: async function(ip) {
         if(ip == null) return false;
 
-        // await this.unblockIpIfDayPassed(ip);
         await this.unblockIpsIfDayPassed();
 
         var IpLog = await VerifyApostilleIpLog.findOne({
