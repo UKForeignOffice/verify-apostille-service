@@ -12,6 +12,10 @@ module.exports = {
             type: 'number',
             columnType: 'integer'
         },
+        FirstFailedAttemptAt: {
+            type: 'string',
+            columnType: 'varchar(27)'
+        },
         BlockedAt: {
             type: 'string',
             columnType: 'varchar(27)'
