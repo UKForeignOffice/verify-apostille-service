@@ -5,7 +5,7 @@
   "description": "FCO Verify Apostille Service",
   "keywords": [],
   "dependencies": {
-    "async": "2.1.4",
+    "async": "2.6.4",
     "connect-mongo": "^1.1.0",
     "continuation-local-storage": "^3.1.7",
     "dotenv": "^8.2.0",
