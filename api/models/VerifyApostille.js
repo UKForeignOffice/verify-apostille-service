@@ -16,22 +16,28 @@ module.exports = {
         },
         DateIssued: {
             type: 'ref',
-            columnType: 'timestamp'
+            columnType: 'timestamp',
+            allowNull: true
         },
         SignedBy: {
-            type: 'string'
+            type: 'string',
+            allowNull: true
         },
         ActingCapacityOf: {
-            type: 'string'
+            type: 'string',
+            allowNull: true
         },
         BearsStampSeal: {
-            type: 'string'
+            type: 'string',
+            allowNull: true
         },
         IssuedBy: {
-            type: 'string'
+            type: 'string',
+            allowNull: true
         },
         ApostilleType: {
-            type: 'string'
+            type: 'string',
+            allowNull: true
         }
     }
 };
