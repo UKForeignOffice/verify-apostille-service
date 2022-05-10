@@ -9,7 +9,7 @@
     "connect-mongo": "^1.1.0",
     "continuation-local-storage": "^3.1.7",
     "dotenv": "^8.2.0",
-    "ejs": "2.5.7",
+    "ejs": "3.1.7",
     "govuk-elements-sass": "1.1.4",
     "govuk-frontend": "^3.8.1",
     "govuk_frontend_toolkit": "4.10.0",
