@@ -16,8 +16,7 @@ module.exports = {
         },
         DateIssued: {
             type: 'ref',
-            columnType: 'timestamp',
-            allowNull: true
+            columnType: 'timestamp'
         },
         SignedBy: {
             type: 'string',
