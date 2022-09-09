@@ -11,46 +11,29 @@
  */
 
 
-var winston = require('winston');
-var moment = require('moment');
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, printf } = format;
 
-var customLogger = new winston.Logger({
+const customFormat = printf(({ level, message, timestamp }) => {
+    return `${timestamp} ${level}: ${message}`;
+});
+
+const customLogger = createLogger({
+    format: combine(
+        timestamp(),
+        customFormat
+    ),
     transports: [
-        /*Log info to console*/
-        new (winston.transports.Console)({
-            timestamp: function() {
-                var date = new Date();
-                return date.toISOString();
-            },
-            formatter: function(options) {
-                return options.timestamp() +' '+ options.level.toUpperCase() +' '+ (undefined !== options.message ? options.message : '') +
-                    (options.meta && Object.keys(options.meta).length ? '\n\t'+ JSON.stringify(options.meta) : '' );
-            },
-            name: 'info-console',
+        new transports.Console({
             level: 'info',
-            handleExceptions: true,
-            humanReadableUnhandledException: true
+            handleExceptions: true
         }),
-        /*Log errors to console */
-        new (winston.transports.Console)({
-            timestamp: function() {
-                var date = new Date();
-                return date.toISOString();
-            },
-            formatter: function(options) {
-                return options.timestamp() +' '+ options.level.toUpperCase() +' '+ (undefined !== options.message ? options.message : '') +
-                    (options.meta && Object.keys(options.meta).length ? '\n\t'+ JSON.stringify(options.meta) : '' );
-            },
-            name: 'error-console',
+        new transports.Console({
             level: 'error',
-            handleExceptions: true,
-            humanReadableUnhandledException: true
+            handleExceptions: true
         })
     ]
 });
-
-
-
 
 module.exports.log = {
 
