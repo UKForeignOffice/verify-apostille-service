@@ -39,7 +39,7 @@
     "sails-disk": "^2.1.1",
     "sails-hook-grunt": "^4.0.1",
     "sails-hook-orm": "^3.0.2",
-    "sails-postgresql": "^4.0.0",
+    "sails-postgresql": "^5.0.1",
     "winston": "^2.4.5",
     "x-xss-protection": "^1.0.0"
   },
