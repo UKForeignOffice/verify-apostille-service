@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  verify:
+    build:
+      context: .
+    ports:
+      - 1337:1337
+    depends_on:
+      - postgres
+    environment:
+      APPLICATIONDATABASE: '{"host": "postgres","user": "postgres", "password": "postgres", "database": "VerifyApostille", "port": 5432, "piwikId": 29, "regex": "/^[a-zA-Z0-9]/"}'
+      MAXFAILEDATTEMPTS: 10
+      NODE_ENV: production
+  postgres:
+    image: postgres:14.6
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: VerifyApostille
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+     - ./databases/VerifyApostille.sql:/docker-entrypoint-initdb.d/VerifyApostille.sql:ro
