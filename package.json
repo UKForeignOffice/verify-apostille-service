@@ -69,7 +69,7 @@
     "nyc": "^15.1.0",
     "should": "^7.1.0",
     "sinon": "^1.17.1",
-    "supertest": "^1.1.0",
+    "supertest": "^6.3.3",
     "xunit-file": "^1.0.0"
   }
 }
