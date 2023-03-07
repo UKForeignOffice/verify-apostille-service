@@ -11,6 +11,10 @@ var apostilleDetailsController = {
         res.json({ message: 'verify-apostille-service running' });
     },
 
+    maintenance: function(req, res){
+        return res.view('maintenance');
+    },
+
     openApostillePage: function(req,res){
 
         return res.view('verifyApostille.ejs',{

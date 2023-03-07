@@ -47,6 +47,8 @@ module.exports.routes = {
 
     'get /healthcheck' : 'VerifyApostilleController.healthcheck'
 
+    'get /maintenance' : 'VerifyApostilleController.maintenance'
+
     /***************************************************************************
      *                                                                          *
      * Custom routes here...                                                    *
