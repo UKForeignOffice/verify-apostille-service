@@ -30,24 +30,6 @@ module.exports.http = {
   *                                                                          *
   ***************************************************************************/
 
-    // order: [
-    //   'startRequestTimer',
-    //   'cookieParser',
-    //   'session',
-    //   'myRequestLogger',
-    //   'bodyParser',
-    //   'handleBodyParserError',
-    //   'compress',
-    //   'methodOverride',
-    //   'poweredBy',
-    //   '$custom',
-    //   'router',
-    //   'www',
-    //   'favicon',
-    //   '404',
-    //   '500'
-    // ],
-
     disablePoweredBy: function(request, response, next) {
       var expressApp = sails.hooks.http.app;
       expressApp.disable('x-powered-by');
@@ -63,8 +45,6 @@ module.exports.http = {
       'handleBodyParserError',
       'compress',
       'methodOverride',
-    //  'poweredBy',
-    //  '$custom',
       'disablePoweredBy',
       'router',
       'www',
