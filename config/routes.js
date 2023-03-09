@@ -45,7 +45,9 @@ module.exports.routes = {
     '/accessibility-statement'                      : { view: 'legalPages/accessibilityStatement' },
     '/rate-limit'                                   : { view: 'rate-limit' },
 
-    'get /healthcheck' : 'VerifyApostilleController.healthcheck'
+    'get /healthcheck' : 'VerifyApostilleController.healthcheck',
+
+    'get /maintenance' : 'VerifyApostilleController.maintenance'
 
     /***************************************************************************
      *                                                                          *

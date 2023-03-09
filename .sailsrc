@@ -3,6 +3,10 @@
         "orm": true,
         "sockets": false,
         "pubsub": false,
-        "session": false
-    }
+        "session": false,
+        "grunt": false
+    },
+    "paths": {
+            "public": "assets"
+        }
 }

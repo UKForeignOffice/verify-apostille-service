@@ -11,6 +11,31 @@
 
 module.exports.bootstrap = function(cb) {
 
+  const sass = require('sass');
+  const fs = require('fs');
+
+  const srcPath = 'assets/styles/importer.scss';
+  const destPath = 'assets/styles/importer.css';
+
+  sass.render({
+    file: srcPath,
+    outFile: destPath,
+    outputStyle: 'compressed',
+    quiet: true
+  }, (error, result) => {
+    if (error) {
+      console.error(error);
+      return;
+    }
+    fs.writeFile(destPath, result.css, (writeError) => {
+      if (writeError) {
+        console.error(writeError);
+        return;
+      }
+      console.log(`Sass compiled successfully from ${srcPath} to ${destPath}`);
+    });
+  });
+
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   cb();
