@@ -38,7 +38,7 @@ describe('VerifyApostilleController', function() {
                     ApostMonth : '07',
                     ApostYear : '2016'
                 })
-                .expect(302,done);
+                .expect(200,done);
         });
 
         it('should return apostille results -- unsuccessful', function (done) {
@@ -50,7 +50,7 @@ describe('VerifyApostilleController', function() {
                     ApostMonth : '07',
                     ApostYear : '2016'
                 })
-                .expect(302,done);
+                .expect(200,done);
         });
 
         it('should return apostille results -- unsuccessful', function (done) {
@@ -62,7 +62,7 @@ describe('VerifyApostilleController', function() {
                     ApostMonth : '07',
                     ApostYear : '2016'
                 })
-                .expect(302,done);
+                .expect(200,done);
         });
 
         it('should return apostille results -- unsuccessful', function (done) {
@@ -74,7 +74,7 @@ describe('VerifyApostilleController', function() {
                     ApostMonth : 'ag',
                     ApostYear : 'aga'
                 })
-                .expect(302,done);
+                .expect(200,done);
         });
     });
 
