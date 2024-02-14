@@ -40,7 +40,7 @@ var apostilleDetailsController = {
             ActingCapacityOf: req.session.actingCapacityOf,
             BearsStampSeal: req.session.BearsStampSeal,
             IssuedBy: req.session.IssuedBy,
-            ApostilleType: req.session.apostilleType,
+            ApostilleType: req.session.apostilleType.toLowerCase(),
           });
         }
 
