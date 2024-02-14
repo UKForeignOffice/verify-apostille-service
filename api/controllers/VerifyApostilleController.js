@@ -107,7 +107,7 @@ var apostilleDetailsController = {
                             ActingCapacityOf: result.ActingCapacityOf,
                             BearsStampSeal: result.BearsStampSeal,
                             IssuedBy: result.IssuedBy,
-                            ApostilleType: result.ApostilleType,
+                            ApostilleType: result.ApostilleType.toLowerCase(),
                         });
                     }
                     else {
