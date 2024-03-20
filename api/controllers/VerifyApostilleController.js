@@ -47,7 +47,7 @@ var apostilleDetailsController = {
     },
 
     findApostille: async function(req, res) {
-        console.log("Got apostille request", req.body);
+        console.log(`Got apostille request: ${JSON.stringify(req.body)}`)
 
         try {
             // req.ip is derived from left-most entry in X-Forwarded-For header
