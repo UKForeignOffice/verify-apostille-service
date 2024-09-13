@@ -19,7 +19,7 @@
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",
     "rc": "^1.2.8",
-    "sails": "^1.5.8",
+    "sails": "^1.5.11",
     "sails-disk": "^2.1.2",
     "sails-hook-orm": "^4.0.3",
     "sails-postgresql": "^5.0.1",
