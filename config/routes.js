@@ -33,11 +33,12 @@ module.exports.routes = {
      ***************************************************************************/
 
     //'/': { view: 'homepage' },
-    '/'        : 'VerifyApostilleController.openApostillePage',
-    '/VerifyApostille' : 'VerifyApostilleController.openApostillePage',
-    '/verify'  : 'VerifyApostilleController.openApostillePage',
-    '/details' : 'VerifyApostilleController.findApostille',
-    '/print'   : 'VerifyApostilleController.printApostille',
+    '/'                             : 'VerifyApostilleController.openApostillePage',
+    '/VerifyApostille'              : 'VerifyApostilleController.openApostillePage',
+    '/verify'                       : 'VerifyApostilleController.openApostillePage',
+    '/details'                      : 'VerifyApostilleController.findApostille',
+    '/print'                        : 'VerifyApostilleController.printApostille',
+
 
     '/terms-and-conditions'                         : { view: 'legalPages/terms' },
     '/cookies'                                      : { view: 'legalPages/cookies' },
