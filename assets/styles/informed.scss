@@ -1,12 +1,19 @@
-/* Global cookie message */
+.govuk-template {
+  background-color: #f4f8fb;
+}
+
+@media print {
+  .noPrint {
+    display: none !important;
+  }
+}
 
 #global-cookie-message {
   width: 100%;
-  background-color: #d5e8f3;
+  background-color: #f4f8fb;
   padding-top: 20px;
   padding-bottom: 20px; }
 #global-cookie-message p {
-  width: 66.6666%;
   font-family: "nta", Arial, sans-serif;
   font-size: 20px;
   line-height: 1.25;
@@ -21,7 +28,7 @@
 
 #confirmation-cookie-message {
   width: 100%;
-  background-color: #d5e8f3;
+  background-color: #f4f8fb;
   padding-top: 20px;
   padding-bottom: 20px; }
 #confirmation-cookie-message p {
@@ -37,6 +44,17 @@
   #confirmation-cookie-message p {
     font-size: 14px;
     line-height: 1.14286; } }
+
+#global-header-bar, #global-cookie-message p, #confirmation-cookie-message p {
+  max-width: 960px;
+  margin: 0 15px; }
+@media (min-width: 641px) {
+  #global-header-bar, #global-cookie-message p, #confirmation-cookie-message p {
+    margin: 0 30px; } }
+@media (min-width: 1020px) {
+  #global-header-bar, #global-cookie-message p, #confirmation-cookie-message p {
+    margin: 0 auto;
+  } }
 
 .back-to-previous {
   font-family: "nta",Arial,sans-serif;
