@@ -10,11 +10,7 @@
  */
 
 module.exports.http = {
-  static: {
-    options: {
-      maxAge: 24 * 60 * 60 * 1000 //cache assets for 1 day
-    }
-  },
+  cache: 24 * 60 * 60 * 1000, // 1 day in milliseconds
 
   /****************************************************************************
   *                                                                           *
