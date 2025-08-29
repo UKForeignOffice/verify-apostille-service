@@ -1,42 +1,84 @@
-/**
- * Bootstrap
- * (sails.config.bootstrap)
- *
- * An asynchronous bootstrap function that runs before your Sails app gets lifted.
- * This gives you an opportunity to set up your data model, run jobs, or perform some special logic.
- *
- * For more information on bootstrapping your app, check out:
- * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.bootstrap.html
- */
+const path = require('path');
+const fs = require('fs');
+const fsp = fs.promises;
 
-module.exports.bootstrap = function(cb) {
+module.exports.bootstrap = function (cb) {
+    const appPath = sails.config.appPath;
 
-  const sass = require('sass');
-  const fs = require('fs');
+    // Source: precompiled files in node_modules
+    const srcDist   = path.join(appPath, 'node_modules', 'govuk-frontend', 'dist', 'govuk');
+    const srcAssets = path.join(srcDist, 'assets');
+    const srcCss    = path.join(srcDist, 'govuk-frontend.min.css');
+    const srcJs     = path.join(srcDist, 'govuk-frontend.min.js');
 
-  const srcPath = 'assets/styles/importer.scss';
-  const destPath = 'assets/styles/importer.css';
+    // Destination: Sails assets folder (served via .tmp/public/)
+    const assetsRoot   = path.join(appPath, 'assets');
+    const destFonts    = path.join(assetsRoot, 'assets', 'fonts');
+    const destImages   = path.join(assetsRoot, 'assets', 'images');
+    const destCss      = path.join(assetsRoot, 'stylesheets', 'govuk-frontend.min.css');
+    const destJs       = path.join(assetsRoot, 'javascripts', 'govuk-frontend.min.js');
 
-  sass.render({
-    file: srcPath,
-    outFile: destPath,
-    outputStyle: 'compressed',
-    quiet: true
-  }, (error, result) => {
-    if (error) {
-      console.error(error);
-      return;
+    (async () => {
+        try {
+            // Ensure folders exist
+            await fsp.mkdir(destFonts, { recursive: true });
+            await fsp.mkdir(destImages, { recursive: true });
+            await fsp.mkdir(path.dirname(destCss), { recursive: true });
+            await fsp.mkdir(path.dirname(destJs), { recursive: true });
+
+            // 1) Copy fonts/ and images/ only
+            await ensureLinkOrCopy(path.join(srcAssets, 'fonts'), destFonts);
+            await ensureLinkOrCopy(path.join(srcAssets, 'images'), destImages);
+
+            // 2) Copy JS
+            await copyFile(srcJs, destJs);
+
+            // 3) Copy and rewrite CSS asset URLs to /assets/
+            await copyCssWithRewrittenAssetUrls(srcCss, destCss, '/assets/');
+
+            sails.log.verbose('✅ GOV.UK Frontend static ready in /assets/, /stylesheets/, /javascripts/');
+        } catch (e) {
+            sails.log.warn('⚠️ Failed to prepare GOV.UK Frontend static:', e);
+        } finally {
+            cb(); // Allow app to continue loading
+        }
+    })();
+
+    // --- helpers ---
+
+    async function ensureLinkOrCopy(src, dest) {
+        try {
+            const st = await fsp.lstat(dest).catch(() => null);
+            if (st) return; // already exists
+            try {
+                await fsp.symlink(src, dest, 'junction');
+            } catch {
+                await copyRecursive(src, dest);
+            }
+        } catch (err) {
+            sails.log.warn(`⚠️ Static prep error for ${dest}:`, err);
+            await copyRecursive(src, dest);
+        }
     }
-    fs.writeFile(destPath, result.css, (writeError) => {
-      if (writeError) {
-        console.error(writeError);
-        return;
-      }
-      console.log(`Sass compiled successfully from ${srcPath} to ${destPath}`);
-    });
-  });
 
-  // It's very important to trigger this callback method when you are finished
-  // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-  cb();
+    async function copyRecursive(src, dest) {
+        await fsp.mkdir(dest, { recursive: true });
+        const entries = await fsp.readdir(src, { withFileTypes: true });
+        for (const e of entries) {
+            const s = path.join(src, e.name);
+            const d = path.join(dest, e.name);
+            if (e.isDirectory()) await copyRecursive(s, d);
+            else await fsp.copyFile(s, d);
+        }
+    }
+
+    async function copyFile(src, dest) {
+        await fsp.copyFile(src, dest);
+    }
+
+    async function copyCssWithRewrittenAssetUrls(srcCssPath, destCssPath, assetPrefix) {
+        let css = await fsp.readFile(srcCssPath, 'utf8');
+        css = css.replace(/url\(\s*(['"]?)(\.\.\/)?assets\//g, `url($1${assetPrefix}`);
+        await fsp.writeFile(destCssPath, css, 'utf8');
+    }
 };

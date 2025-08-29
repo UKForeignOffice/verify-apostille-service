@@ -1,10 +1,20 @@
-<header>
-    <h1 class="govuk-heading-xl"><%= data%></h1>
-</header>
-<article>
-    <p class="govuk-body">Please check that you have entered the correct web address, or try:</p>
-    <ul class="govuk-list">
-        <li><a href="/" class="govuk-link">Verify an Apostille</a></li>
-        <li><a href="https://www.gov.uk" class="govuk-link">GOV.UK home page</a></li>
-    </ul>
-</article>
+<% pageTitle = data + " – Verify an Apostille – GOV.UK" %>
+
+<div class="govuk-width-container">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+
+                <h1 class="govuk-heading-xl"><%= data %></h1>
+
+                <p class="govuk-body">
+                    Please check that you have entered the correct web address, or try:
+                </p>
+
+                <ul class="govuk-list govuk-list--bullet">
+                    <li><a href="/" class="govuk-link">Verify an Apostille</a></li>
+                    <li><a href="https://www.gov.uk" class="govuk-link" target="_blank" rel="noopener noreferrer">GOV.UK home page<span class="govuk-visually-hidden"> (opens in new window)</span></a></li>
+                </ul>
+
+            </div>
+        </div>
+</div>

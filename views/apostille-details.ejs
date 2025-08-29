@@ -1,102 +1,78 @@
-<% pageTitle = (ApostilleType === "paper") ? "Apostille verified" : "e-Apostille verified" %>
+<% pageTitle = (ApostilleType === "paper") ? "Apostille verified – GOV.UK" : "e-Apostille verified – GOV.UK" %>
 
-<h1 class="govuk-heading-xl">
-    <% if (ApostilleType === "paper") {%>
-        Apostille verified
-    <% } else { %>
-        e-Apostille verified
-    <% } %>
-</h1>
+<div class="govuk-width-container">
 
-<section id="content" class="govuk-grid-row">
-<div class="govuk-grid-column-full">
-    <dl class="govuk-summary-list">
-        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-                Apostille number
-            </dt>
-            <dd class="govuk-summary-list__value">
-                <%= ApostilleNumber%>
-            </dd>
+        <h1 class="govuk-heading-xl">
+            <% if (ApostilleType === "paper") { %>
+                Apostille verified
+            <% } else { %>
+                e-Apostille verified
+            <% } %>
+        </h1>
+
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Apostille number</dt>
+                        <dd class="govuk-summary-list__value"><%= ApostilleNumber %></dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Date of issue</dt>
+                        <dd class="govuk-summary-list__value"><%= moment(DateIssued).format('D MMMM YYYY') %></dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Has been signed by</dt>
+                        <dd class="govuk-summary-list__value"><%= SignedBy %></dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Acting in the capacity of</dt>
+                        <dd class="govuk-summary-list__value"><%= ActingCapacityOf %></dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Bears the stamp / seal of</dt>
+                        <dd class="govuk-summary-list__value"><%= BearsStampSeal %></dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">Issued by</dt>
+                        <dd class="govuk-summary-list__value"><%= IssuedBy %></dd>
+                    </div>
+                </dl>
+
+                <% if (ApostilleType === "paper") { %>
+                    <p class="govuk-body">
+                        All paper apostilles (legalisation certificates) issued by the Legalisation Office bear a raised and embossed imprint of the Foreign, Commonwealth and Development Office crest. This embossed imprint should also appear immediately below on the document to which the apostille is attached.
+                    </p>
+                <% } else { %>
+                    <p class="govuk-body">
+                        All electronic Apostilles (e-Apostilles) issued by the Legalisation Office will be in PDF format. The PDF file will bear a digital signature of ‘Legalisation Office’. It will contain a cover sheet with two PDF files attached.
+                    </p>
+                    <p class="govuk-body">
+                        The first PDF attachment will be the Apostille (legalisation certificate) and will bear the same digital signature of ‘Legalisation Office’. The details shown on the Apostille will match those shown above.
+                    </p>
+                    <p class="govuk-body">
+                        The second PDF attachment will be the public document the Apostille relates to and will be digitally signed by the person shown in the ‘Has been signed by’ section above.
+                    </p>
+                <% } %>
+
+                <div class="govuk-button-group noPrint">
+                    <button onclick="window.print()" class="govuk-button">
+                        Print
+                    </button>
+                    <a href="/verify" class="govuk-link">Verify another Apostille</a>
+                </div>
+
+                <script type="text/javascript">
+                    var win;
+                    function resetForm() {
+                        window.location.replace('/VerifyApostille');
+                        if (win != null) {
+                            win.close();
+                        }
+                    }
+                </script>
+
+            </div>
         </div>
-        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-                Date of issue
-            </dt>
-            <dd class="govuk-summary-list__value">
-                <%= moment(DateIssued).format('D MMMM YYYY')%>
-            </dd>
-        </div>
-        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-                Has been signed by
-            </dt>
-            <dd class="govuk-summary-list__value">
-                <%= SignedBy%>
-            </dd>
-        </div>
-        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-                Acting in the capacity of
-            </dt>
-            <dd class="govuk-summary-list__value">
-                <%= ActingCapacityOf%>
-            </dd>
-        </div>
-        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-                Bears the stamp / seal of
-            </dt>
-            <dd class="govuk-summary-list__value">
-                <%= BearsStampSeal%>
-            </dd>
-        </div>
-        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-                Issued by
-            </dt>
-            <dd class="govuk-summary-list__value">
-                <%= IssuedBy%>
-            </dd>
-        </div>
-    </dl>
-
-    <% if (ApostilleType === "paper") {%>
-        <p class="govuk-body">
-            All paper apostilles (legalisation certificates) issued by the Legalisation Office bear a raised and embossed imprint of the Foreign, Commonwealth and Development Office crest.
-            This embossed imprint should also appear immediately below on the document to which the apostille is attached.
-        </p>
-    <% } else { %>
-        <p class="govuk-body">
-            All electronic Apostilles (e-Apostilles) issued by the Legalisation Office will be in PDF format. The PDF file will bear a digital signature of ‘Legalisation Office’. It will contain a cover sheet with two PDF files attached.
-        </p>
-        <p class="govuk-body">
-            The first PDF attachment will be the Apostille (legalisation certificate) and will bear the same digital signature of ‘Legalisation Office’. The details shown on the Apostille will match those shown above.
-        </p>
-        <p class="govuk-body">
-            The second PDF attachment will be the public document the Apostille relates to and will be digitally signed by the person shown in the ‘Has been signed by’ section above.
-        </p>
-    <% } %>
-
-    <div class="govuk-body">
-        <button onclick="window.print()" class="govuk-button noPrint">
-            Print
-        </button>
-        <br />
-        <a draggable="false" href="/verify" class="govuk-link noPrint">Verify another Apostille</a>
-    </div>
-
-    <script type="text/javascript">
-
-        var win;
-
-        function resetForm() {
-            window.location.replace('/VerifyApostille');
-            if (win != null) {
-                win.close();
-            }
-        }
-
-    </script>
 </div>
-</section>
