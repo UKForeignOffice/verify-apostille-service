@@ -1,122 +1,65 @@
 <!DOCTYPE html>
 <html lang="en" class="govuk-template govuk-template--rebranded">
+
 <head>
     <meta charset="utf-8">
     <title><% if (typeof pageTitle != 'undefined' && pageTitle) { %><%=pageTitle%><%}%></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#0b0c0c">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <link rel="shortcut icon" href="/assets/images/favicon.svg?0.15.1" type="image/x-icon" />
-    <link rel="mask-icon" href="/assets/images/govuk-mask-icon.svg" color="#0b0c0c">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/govuk-apple-touch-icon-180x180.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="/assets/images/govuk-apple-touch-icon-167x167.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/assets/images/govuk-apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" href="/assets/images/govuk-apple-touch-icon.png">
-
-    <!--[if !IE 8]><!-->
-    <!--STYLES-->
-    <link rel="stylesheet" href="/styles/importer.css">
-    <!--STYLES END-->
-    <!--<![endif]-->
-
-    <!--[if IE 8]>
-      <link href="/govuk-frontend/all-ie8.css" rel="stylesheet">
-    <![endif]-->
-
-    <!--[if lt IE 9]>
-      <script src="/html5-shiv/html5shiv.js"></script>
-    <![endif]-->
-
-    <meta property="og:image" content="/assets/images/govuk-opengraph-image.png">
-    <script src="/js/jquery-3.5.1.min.js"></script>
-    <script src="/js/main.js"></script>
-
+    <meta name="theme-color" content="#1d70b8">
+    <link rel="icon" sizes="48x48" href="/assets/rebrand/images/favicon.ico">
+    <link rel="icon" sizes="any" href="/assets/rebrand/images/favicon.svg" type="image/svg+xml">
+    <link rel="mask-icon" href="/assets/rebrand/images/govuk-icon-mask.svg" color="#1d70b8">
+    <link rel="apple-touch-icon" href="/assets/rebrand/images/govuk-icon-180.png">
+    <link rel="manifest" href="/assets/rebrand/manifest.json">
+    <link rel="stylesheet" href="/stylesheets/govuk-frontend.min.css">
+    <link rel="stylesheet" href="/stylesheets/noPrint.css">
 </head>
 
-<script src="/js/cookie-functions.js"></script>
-<script> var _paq = _paq || [];</script>
 <body class="govuk-template__body">
-<script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
-<% if ( typeof apostPrint == 'undefined' ) {%>
-<%- partial ('partials/header.ejs') %>
-<%}%>
+<script>
+    document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');
+</script>
+
+<%- include('partials/header') %>
+
 <%- body %>
 
-<!--
-    Client-side Templates
-    ========================
+<%- include('partials/footer') %>
 
-    HTML templates are important prerequisites of modern, rich client applications.
-    To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
-    that you load these templates client-side.
-
-    By default, your Gruntfile is configured to automatically load and precompile
-    client-side JST templates in your `assets/templates` folder, then
-    include them here automatically (between TEMPLATES and TEMPLATES END).
-
-    To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
-    For example, here are a few things you could do:
-
-        + Import templates from other directories
-        + Use a different template engine (handlebars, jade, dust, etc.)
-        + Internationalize your client-side templates using a server-side
-          stringfile before they're served.
--->
-
-<!--TEMPLATES-->
-
-<!--TEMPLATES END-->
-
-<% if ( typeof apostPrint == 'undefined' ){%>
-<%- partial ('partials/footer.ejs') %>
-<%}%>
-<!--
-
-  Client-side Javascript
-  ========================
-
-  You can always bring in JS files manually with `script` tags, or asynchronously
-  on the client using a solution like AMD (RequireJS).  Or, if you like, you can
-  take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
-
-  By default, files in your `assets/js` folder are included here
-  automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
-  CoffeeScript (.coffee) are supported. In production, your scripts will be minified
-  and concatenated into a single file.
-
-  To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
-  For example, here are a few things you could do:
-
-      + Change the order of your scripts
-      + Import scripts from other directories
-      + Use a different preprocessor, like TypeScript
-
--->
-
-<!-- Piwik -->
-<script type="text/javascript">
-  var _paq = _paq || [];
-  _paq.push(["setDomains", ["*.verifyapostille.service.gov.uk","*.www.verifyapostille.service.gov.uk"]]);
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//web-analytics.fco.gov.uk/piwik/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', <%= sails.config.piwikID%>]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
+<script type="module" src="/javascripts/govuk-frontend.min.js"></script>
+<script type="module">
+    import {
+        initAll
+    } from '/javascripts/govuk-frontend.min.js'
+    initAll()
 </script>
-<noscript><p><img src="//web-analytics.fco.gov.uk/piwik/piwik.php?idsite=<%= sails.config.piwikID%>" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->
-
-<noscript>
-<!-- Piwik Image Tracker-->
-<img src="https://web-analytics.fco.gov.uk/piwik/piwik.php?idsite=<%= sails.config.piwikID%>&rec=1" style="border:0" alt="" />
-<!-- End Piwik -->
-</noscript>
-
 </body>
+
+<script>
+    (function () {
+        function hasUsageConsent () {
+            try {
+                var c = window.GOVUK && GOVUK.getConsentCookie ? GOVUK.getConsentCookie() : null;
+                return !!(c && c.usage === true);
+            } catch (e) {
+                return false;
+            }
+        }
+
+        if (!hasUsageConsent()) return;
+
+        window._paq = window._paq || [];
+        var u = "https://web-analytics.fco.gov.uk/piwik/";
+
+        _paq.push(["setDomains", ["*.verifyapostille.service.gov.uk"]]);
+        _paq.push(["enableLinkTracking"]);
+        _paq.push(["setTrackerUrl", u + "piwik.php"]);
+        _paq.push(["setSiteId", <%= sails.config.piwikID %>]);
+        _paq.push(["trackPageView"]);
+
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        g.async = true; g.defer = true; g.src = u + 'piwik.js';
+        s.parentNode.insertBefore(g, s);
+    })();
+</script>
 </html>
