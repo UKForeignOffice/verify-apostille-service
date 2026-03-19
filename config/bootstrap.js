@@ -10,11 +10,13 @@ module.exports.bootstrap = function (cb) {
     const srcAssets = path.join(srcDist, 'assets');
     const srcCss    = path.join(srcDist, 'govuk-frontend.min.css');
     const srcJs     = path.join(srcDist, 'govuk-frontend.min.js');
+    const srcManifest = path.join(srcAssets, 'manifest.json');
 
     // Destination: Sails assets folder (served via .tmp/public/)
     const assetsRoot   = path.join(appPath, 'assets');
     const destFonts    = path.join(assetsRoot, 'assets', 'fonts');
     const destImages   = path.join(assetsRoot, 'assets', 'images');
+    const destManifest = path.join(assetsRoot, 'assets', 'manifest.json');
     const destCss      = path.join(assetsRoot, 'stylesheets', 'govuk-frontend.min.css');
     const destJs       = path.join(assetsRoot, 'javascripts', 'govuk-frontend.min.js');
 
@@ -29,6 +31,7 @@ module.exports.bootstrap = function (cb) {
             // 1) Copy fonts/ and images/ only
             await ensureLinkOrCopy(path.join(srcAssets, 'fonts'), destFonts);
             await ensureLinkOrCopy(path.join(srcAssets, 'images'), destImages);
+            await copyIfExists(srcManifest, destManifest);
 
             // 2) Copy JS
             await copyFile(srcJs, destJs);
@@ -74,6 +77,16 @@ module.exports.bootstrap = function (cb) {
 
     async function copyFile(src, dest) {
         await fsp.copyFile(src, dest);
+    }
+
+    async function copyIfExists(src, dest) {
+        try {
+            await fsp.copyFile(src, dest);
+        } catch (error) {
+            if (error && error.code !== 'ENOENT') {
+                throw error;
+            }
+        }
     }
 
     async function copyCssWithRewrittenAssetUrls(srcCssPath, destCssPath, assetPrefix) {
