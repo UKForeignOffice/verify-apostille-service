@@ -30,7 +30,7 @@
   },
   "scripts": {
     "test": "mocha test/bootstrap.test.js test/unit/**/*.test.js --exit",
-    "debug": "node debug app.js",
+    "debug": "node --inspect app.js",
     "start": "node app.js",
     "dev-start": "NODE_ENV=development npx nodemon --inspect app.js",
     "test-jenkins": "node node_modules/mocha/bin/mocha --timeout 10000 --recursive  -R xunit-file test/bootstrap.test.js test/unit/**/*.test.js",
