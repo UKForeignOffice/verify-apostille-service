@@ -1,12 +1,14 @@
 FROM node:24-alpine AS build
 WORKDIR /opt/app
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm ci --omit=dev \
+  && rm -rf /opt/app/node_modules/redis/heroku
 
 FROM node:24-alpine AS run
 WORKDIR /opt/app
 COPY --from=build /opt/app ./
 COPY . ./
+RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
 RUN find /opt/app -type f \( \
   -name "package-lock.json" -o \
   -name "Gemfile.lock" -o \

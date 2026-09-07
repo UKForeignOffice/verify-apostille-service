@@ -3,3 +3,6 @@
 Dockerfile
 README.md
 scripts/*
+node_modules/
+.git/
+.tmp/
