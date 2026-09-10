@@ -6,8 +6,8 @@ RUN npm ci --omit=dev \
 
 FROM node:24-alpine AS run
 WORKDIR /opt/app
-COPY --from=build /opt/app ./
-COPY . ./
+COPY --chown=node:node --from=build /opt/app ./
+COPY --chown=node:node . ./
 RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
 RUN find /opt/app -type f \( \
   -name "package-lock.json" -o \
@@ -17,4 +17,5 @@ RUN find /opt/app -type f \( \
   -name "pnpm-lock.yaml" \
 \) -delete
 EXPOSE 1337
+USER node
 CMD ["node", "app"]
