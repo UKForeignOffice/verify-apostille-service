@@ -16,6 +16,7 @@ RUN find /opt/app -type f \( \
   -name "yarn.lock" -o \
   -name "pnpm-lock.yaml" \
 \) -delete
+RUN chown node:node /opt/app
 EXPOSE 1337
 USER node
 CMD ["node", "app"]
