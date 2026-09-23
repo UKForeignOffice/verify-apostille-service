@@ -25,7 +25,8 @@
     "lint": "biome lint .",
     "format": "biome check --write .",
     "quality": "biome check --changed --since=develop",
-    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --timeout 10000 --recursive -R tap test/bootstrap.test.js test/unit/**/*.test.js > test.tap && istanbul report clover"
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --timeout 10000 --recursive -R tap test/bootstrap.test.js test/unit/**/*.test.js > test.tap && istanbul report clover",
+    "prepare": "husky"
   },
   "main": "app.js",
   "repository": {
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.12",
     "chai": "^4.3.8",
+    "husky": "^9.1.7",
     "mocha": "^10.4.0",
     "nodemon": "^3.1.9",
     "supertest": "^6.3.3",
