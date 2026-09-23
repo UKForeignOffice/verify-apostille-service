@@ -26,7 +26,7 @@
     "format": "biome check --write .",
     "quality": "biome check --changed --since=develop",
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --timeout 10000 --recursive -R tap test/bootstrap.test.js test/unit/**/*.test.js > test.tap && istanbul report clover",
-    "prepare": "husky"
+    "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky; fi"
   },
   "main": "app.js",
   "repository": {
